@@ -38,7 +38,7 @@ export const SITE_CONFIG = {
     href: 'mailto:care@tutorsnext.com',
   },
   // Change activeHome to 'home' or 'home-1' to choose which home shows on '/'
-  activeHome: 'home1',
+  activeHome: 'home',
   routes: {
     register: '/register',   // Change once here — updates Navbar & everywhere else
     login: '/login',
