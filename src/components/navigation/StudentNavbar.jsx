@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon.jsx';
+import { studentNav } from '../../config/sectionIcons.js';
 
 const StudentNavbar = () => {
   const navigate = useNavigate();
@@ -38,9 +40,7 @@ const StudentNavbar = () => {
               className="flex items-center gap-2 text-slate-700 hover:text-primary transition-colors text-sm font-semibold py-2 px-3 rounded-xl hover:bg-slate-50"
             >
               <div className="w-8 h-8 rounded-full bg-sky-50 text-primary flex items-center justify-center">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                </svg>
+                <Icon icon={studentNav.phone} className="w-4 h-4" />
               </div>
               <span>{phone.display}</span>
             </a>
@@ -53,9 +53,7 @@ const StudentNavbar = () => {
               to="/student/dashboard"
               className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm px-4 py-2.5 rounded-xl transition-all"
             >
-              <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-              </svg>
+              <Icon icon={studentNav.user} className="w-4 h-4 text-slate-600" />
               <span>User Area</span>
             </Link>
 
@@ -66,9 +64,7 @@ const StudentNavbar = () => {
               className="flex items-center gap-1.5 text-slate-600 hover:text-red-600 hover:bg-red-50 font-bold text-sm px-3.5 py-2.5 rounded-xl transition-colors cursor-pointer"
               title="Logout from account"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-              </svg>
+              <Icon icon={studentNav.logout} className="w-4 h-4" />
               <span>Logout</span>
             </button>
           </div>
@@ -80,13 +76,11 @@ const StudentNavbar = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {isMobileMenuOpen ? (
+                <Icon icon={studentNav.close} className="w-6 h-6" />
+              ) : (
+                <Icon icon={studentNav.menu} className="w-6 h-6" />
+              )}
             </button>
           </div>
 
@@ -99,9 +93,7 @@ const StudentNavbar = () => {
               href={phone.href}
               className="flex items-center gap-2 text-slate-800 font-semibold text-sm py-2 px-3 rounded-lg bg-slate-50"
             >
-              <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-              </svg>
+              <Icon icon={studentNav.phone} className="w-4 h-4 text-primary" />
               <span>Call Support: {phone.display}</span>
             </a>
 

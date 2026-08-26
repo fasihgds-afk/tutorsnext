@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Icon from '../common/Icon';
+import { testimonials as testimonialsIcons } from '../../config/sectionIcons';
+
 const testimonials = [
   {
     id: 1,
@@ -55,9 +58,7 @@ const TestimonialsSection = () => {
 
         {/* Top Badge */}
         <div className="inline-flex items-center gap-2 bg-primary-soft text-brand-purple px-4 py-1.5 rounded-full text-[12px] lg:text-[13px] font-semibold mb-4 shadow-xs border border-primary-border hover:scale-105 transition-transform duration-300 cursor-default">
-          <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-          </svg>
+          <Icon icon={testimonialsIcons.badge} className="w-4 h-4 shrink-0" />
           <span>STUDENT SUCCESS STORIES</span>
         </div>
 
@@ -80,9 +81,7 @@ const TestimonialsSection = () => {
           {/* Prev */}
           <button onClick={prevDesktop}
             className="absolute -left-5 z-10 w-10 h-10 rounded-full bg-surface shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-card-border flex items-center justify-center text-text-body hover:text-brand-purple hover:border-primary-border hover:scale-110 transition-all duration-200">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
+            <Icon icon={testimonialsIcons.chevronLeft} className="w-5 h-5" strokeWidth={2.5} />
           </button>
 
           {/* Cards */}
@@ -95,9 +94,7 @@ const TestimonialsSection = () => {
           {/* Next */}
           <button onClick={nextDesktop}
             className="absolute -right-5 z-10 w-10 h-10 rounded-full bg-surface shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-card-border flex items-center justify-center text-text-body hover:text-brand-purple hover:border-primary-border hover:scale-110 transition-all duration-200">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+            <Icon icon={testimonialsIcons.chevronRight} className="w-5 h-5" strokeWidth={2.5} />
           </button>
         </div>
 
@@ -107,9 +104,7 @@ const TestimonialsSection = () => {
           {/* Prev */}
           <button onClick={prevMobile}
             className="absolute -left-1 z-10 w-9 h-9 rounded-full bg-surface shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-card-border flex items-center justify-center text-text-body hover:text-brand-purple hover:scale-110 transition-all duration-200">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
+            <Icon icon={testimonialsIcons.chevronLeft} className="w-4 h-4" strokeWidth={2.5} />
           </button>
 
           {/* Single Card */}
@@ -122,9 +117,7 @@ const TestimonialsSection = () => {
           {/* Next */}
           <button onClick={nextMobile}
             className="absolute -right-1 z-10 w-9 h-9 rounded-full bg-surface shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-card-border flex items-center justify-center text-text-body hover:text-brand-purple hover:scale-110 transition-all duration-200">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+            <Icon icon={testimonialsIcons.chevronRight} className="w-4 h-4" strokeWidth={2.5} />
           </button>
         </div>
 
@@ -146,9 +139,7 @@ const TestimonialCard = ({ t }) => (
   <div className="group bg-surface rounded-[20px] p-5 lg:p-7 border border-card-border shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(2,132,199,0.1)] hover:border-primary-border transition-all duration-300">
 
     {/* Quote icon */}
-    <svg className="w-7 h-7 text-primary-soft mb-3 group-hover:text-primary-200 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.996v10h-9.996z" />
-    </svg>
+    <Icon icon={testimonialsIcons.badge} className="w-7 h-7 text-primary-soft mb-3 group-hover:text-primary-200 transition-colors duration-300" />
 
     {/* Review text */}
     <p className="text-text-body text-[13.5px] lg:text-[14px] leading-relaxed mb-5 flex-1 opacity-80">
@@ -168,17 +159,13 @@ const TestimonialCard = ({ t }) => (
       <div className="flex items-center gap-3 min-w-0">
         {/* Avatar */}
         <div className={`w-10 h-10 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-          <svg className={`w-6 h-6 ${t.avatarTextColor}`} fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-          </svg>
+          <Icon icon={testimonialsIcons.user} className={`w-6 h-6 ${t.avatarTextColor}`} />
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1">
             <h4 className="text-text-dark font-bold text-[13px] whitespace-nowrap">{t.name}</h4>
             {/* Verified */}
-            <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-            </svg>
+            <Icon icon={testimonialsIcons.verified} className="w-3.5 h-3.5 text-primary shrink-0" />
           </div>
           <p className="text-text-body text-[11px] opacity-60 whitespace-nowrap">{t.university}</p>
         </div>

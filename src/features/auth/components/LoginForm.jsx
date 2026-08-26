@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../../config/siteConfig';
+import Icon from '../../../components/common/Icon.jsx';
+import { auth } from '../../../config/sectionIcons.js';
 
 // ─── Field wrapper ────────────────────────────────────────────────────────────
 const FieldWrapper = ({ label, error, children }) => (
@@ -11,9 +13,7 @@ const FieldWrapper = ({ label, error, children }) => (
     {children}
     {error && (
       <span className="text-red-500 text-[11px] font-medium mt-0.5 flex items-center gap-1">
-        <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-        </svg>
+        <Icon icon={auth.form.error} className="w-3 h-3 shrink-0" />
         {error}
       </span>
     )}
@@ -105,9 +105,7 @@ const LoginForm = ({ onSubmit }) => {
           {/* Backend Error Banner */}
           {apiError && (
             <div className="p-3 bg-red-50 border border-red-200/80 rounded-xl flex items-start gap-2.5 text-red-700 text-xs">
-              <svg className="w-4 h-4 shrink-0 text-red-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
+              <Icon icon={auth.form.error} className="w-4 h-4 shrink-0 text-red-500 mt-0.5" />
               <div className="flex-1 font-medium">{apiError}</div>
             </div>
           )}
@@ -116,9 +114,7 @@ const LoginForm = ({ onSubmit }) => {
           <FieldWrapper label="Email Address" error={errors.email}>
             <div className="relative">
               <InputIcon>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+                <Icon icon={auth.form.email} className="w-4 h-4" />
               </InputIcon>
               <input
                 type="email"
@@ -136,9 +132,7 @@ const LoginForm = ({ onSubmit }) => {
           <FieldWrapper label="Password" error={errors.password}>
             <div className="relative">
               <InputIcon>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+                <Icon icon={auth.form.lock} className="w-4 h-4" />
               </InputIcon>
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -156,14 +150,9 @@ const LoginForm = ({ onSubmit }) => {
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
+                  <Icon icon={auth.form.eyeOff} className="w-4 h-4" />
                 ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
+                  <Icon icon={auth.form.eye} className="w-4 h-4" />
                 )}
               </button>
             </div>
@@ -175,18 +164,15 @@ const LoginForm = ({ onSubmit }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full mt-1 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-700 hover:to-sky-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+            className="btn-fill-hover w-full mt-1 disabled:opacity-60 disabled:cursor-not-allowed text-sm font-bold py-2.5 px-6 rounded-lg shadow-lg shadow-sky-500/25 cursor-pointer flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
-              <>
-                <svg className="animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
+              <span className="inline-flex items-center justify-center gap-2">
+                <Icon icon={auth.form.loading} className="animate-spin w-4 h-4" />
                 <span>Signing In…</span>
-              </>
+              </span>
             ) : (
-              'Sign In'
+              <span>Sign In</span>
             )}
           </button>
 

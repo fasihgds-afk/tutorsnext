@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon';
+import { ctaBanner } from '../../config/sectionIcons';
 
 const CTABannerSection = () => {
   return (
@@ -41,9 +43,7 @@ const CTABannerSection = () => {
               {['Top Quality Guidance', 'Affordable Fee Structure', 'Total Satisfaction Guaranteed'].map((item) => (
                 <li key={item} className="group flex items-center gap-2.5">
                   <span className="w-4 h-4 rounded-full bg-primary flex items-center justify-center text-surface shrink-0 group-hover:scale-125 transition-transform duration-200">
-                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
+                    <Icon icon={ctaBanner.checks} className="w-2.5 h-2.5" />
                   </span>
                   <span className="text-[13.5px] font-bold text-text-dark">{item}</span>
                 </li>
@@ -51,8 +51,10 @@ const CTABannerSection = () => {
             </ul>
 
             <Link to={SITE_CONFIG.routes.login}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(2,132,199,0.3)] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(2,132,199,0.4)] active:scale-[0.97] transition-all duration-200">
-              Book Your Demo <span className="text-base leading-none">&rarr;</span>
+              className="btn-fill-hover w-full inline-flex items-center justify-center gap-2 font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(2,132,199,0.3)]">
+              <span className="inline-flex items-center justify-center gap-2">
+                Book Your Demo <span className="text-base leading-none">&rarr;</span>
+              </span>
             </Link>
           </div>
 

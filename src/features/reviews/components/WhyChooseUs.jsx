@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../../../components/common/Icon.jsx';
+import { reviews } from '../../../config/sectionIcons.js';
 
 const items = [
   'Premium quality',
@@ -23,9 +25,7 @@ const WhyChooseUs = () => {
       <div className="flex flex-col divide-y divide-[#f1f5f9] text-[13.5px]">
         {items.map((item) => (
           <div key={item} className="py-3 flex items-center gap-3 text-[#0f172a] font-medium">
-            <svg className="w-4 h-4 text-primary shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-            </svg>
+            <Icon icon={reviews.verified} className="w-4 h-4 text-primary shrink-0" />
             {item}
           </div>
         ))}

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon.jsx';
+import { nav } from '../../config/sectionIcons.js';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -87,9 +89,7 @@ const Navbar = () => {
               href={currentPhone.href}
               className="hidden xl:flex items-center gap-1.5 text-primary font-medium text-sm hover:text-primary-hover transition-colors whitespace-nowrap"
             >
-              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-              </svg>
+              <Icon icon={nav.phone} className="w-4 h-4 shrink-0" />
               <span>{currentPhone.display}</span>
             </a>
 
@@ -97,24 +97,24 @@ const Navbar = () => {
             {!isHome1 && (
               <Link
                 to={SITE_CONFIG.routes.register}
-                className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-sm whitespace-nowrap"
+                className="btn-fill-hover flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full shadow-sm whitespace-nowrap"
               >
-                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-                <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon icon={nav.plus} className="w-3.5 h-3.5 shrink-0" strokeWidth={2.5} />
+                  <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
+                </span>
               </Link>
             )}
 
             {/* Login */}
             <Link
               to={SITE_CONFIG.routes.login}
-              className="flex items-center gap-2 border border-primary rounded-full px-4 py-2 text-sm text-primary font-semibold hover:bg-primary-light transition-all whitespace-nowrap"
+              className="btn-fill-hover-outline flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap"
             >
-              <span>Login</span>
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+              <span className="inline-flex items-center gap-2">
+                <span>Login</span>
+                <Icon icon={nav.user} className="w-4 h-4 shrink-0" />
+              </span>
             </Link>
           </div>
 
@@ -127,13 +127,9 @@ const Navbar = () => {
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <Icon icon={nav.close} className="w-6 h-6" />
               ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                <Icon icon={nav.menu} className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -183,9 +179,7 @@ const Navbar = () => {
                 href={currentPhone.href}
                 className="flex items-center space-x-2 text-primary font-semibold"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                </svg>
+                <Icon icon={nav.phone} className="w-5 h-5" />
                 <span>{currentPhone.display}</span>
               </a>
               {/* Hire A Writer / Tutor — hidden on Home-1 */}
@@ -193,23 +187,23 @@ const Navbar = () => {
                 <Link
                   to={SITE_CONFIG.routes.register}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-full transition-all"
+                  className="btn-fill-hover flex items-center justify-center gap-2 font-semibold px-5 py-2.5 rounded-full"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                  </svg>
-                  <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
+                  <span className="inline-flex items-center gap-2">
+                    <Icon icon={nav.plus} className="w-4 h-4" />
+                    <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
+                  </span>
                 </Link>
               )}
               <Link
                 to={SITE_CONFIG.routes.login}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-center border border-primary rounded-full px-5 py-2 text-primary font-semibold hover:bg-primary-light transition-all space-x-2"
+                className="btn-fill-hover-outline flex items-center justify-center rounded-full px-5 py-2 font-semibold"
               >
-                <span>Login</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+                <span className="inline-flex items-center gap-2">
+                  <span>Login</span>
+                  <Icon icon={nav.user} className="w-5 h-5" />
+                </span>
               </Link>
             </div>
           </div>

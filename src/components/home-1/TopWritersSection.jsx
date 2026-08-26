@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon';
+import { topWriters } from '../../config/sectionIcons';
 
 const TopWritersSection = () => {
   const writers = [
@@ -51,9 +53,7 @@ const TopWritersSection = () => {
 
         {/* Top Pill Badge */}
         <div className="inline-flex items-center gap-1.5 bg-primary-soft text-brand-purple px-3.5 py-1 rounded-full text-[13px] font-semibold mb-4 shadow-xs border border-primary-border">
-          <svg className="w-4 h-4 text-brand-purple" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd"></path>
-          </svg>
+          <Icon icon={topWriters.badge} className="w-4 h-4 text-brand-purple" />
           Our Top Tutors
         </div>
 
@@ -90,9 +90,7 @@ const TopWritersSection = () => {
                       <div className="flex items-center gap-1">
                         <h3 className="text-[15px] font-bold text-gray-900 whitespace-nowrap truncate">{writer.name}</h3>
                         {/* Verified Badge Icon */}
-                        <svg className="w-4 h-4 text-blue-600 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.99 14l-4.2-4.2 1.41-1.41 2.79 2.79 7.21-7.21 1.41 1.41-8.62 8.62z" />
-                        </svg>
+                        <Icon icon={topWriters.verified} className="w-4 h-4 text-blue-600 shrink-0" />
                       </div>
                       <div className="flex items-center gap-1.5 mt-0.5">
                         <div className="flex text-amber-400 text-[12px]">★★★★★</div>

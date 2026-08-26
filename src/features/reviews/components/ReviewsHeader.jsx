@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Icon from '../../../components/common/Icon.jsx';
+import { reviews } from '../../../config/sectionIcons.js';
 
 const ratingBars = [
   { label: '5 star', pct: '95%', value: '95%' },
@@ -58,9 +60,7 @@ const ReviewsHeader = () => {
             <option>Lowest Rating</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-[#64748b]">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+            <Icon icon={reviews.chevron} className="w-4 h-4" strokeWidth={2.5} />
           </span>
         </div>
       </div>

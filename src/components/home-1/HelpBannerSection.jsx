@@ -1,5 +1,7 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon';
+import { helpBanner } from '../../config/sectionIcons';
 
 const HelpBannerSection = () => {
   return (
@@ -75,45 +77,38 @@ const HelpBannerSection = () => {
                 <button
                   type="button"
                   onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
-                  className="group inline-flex items-center justify-center gap-2 bg-surface hover:bg-primary-50 text-brand-purple text-[14px] font-bold px-5 py-3 rounded-[12px] shadow-sm hover:scale-[1.03] hover:shadow-md active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap cursor-pointer"
+                  className="btn-fill-hover inline-flex items-center justify-center gap-2 text-[14px] font-bold px-5 py-3 rounded-[12px] shadow-sm w-full sm:w-auto whitespace-nowrap cursor-pointer"
                 >
-                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Talk to an Expert
+                  <span className="inline-flex items-center justify-center gap-2">
+                    <Icon icon={helpBanner.chat} className="w-4 h-4" />
+                    Talk to an Expert
+                  </span>
                 </button>
 
                 <a
                   href={SITE_CONFIG.whatsapp.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 bg-surface/15 hover:bg-surface/25 text-surface border border-surface/30 hover:border-surface/60 text-[14px] font-bold px-5 py-3 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 w-full sm:w-auto whitespace-nowrap">
-                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  Call Now
+                  className="btn-fill-hover-ghost inline-flex items-center justify-center gap-2 text-[14px] font-bold px-5 py-3 rounded-[12px] w-full sm:w-auto whitespace-nowrap">
+                  <span className="inline-flex items-center justify-center gap-2">
+                    <Icon icon={helpBanner.phone} className="w-4 h-4" />
+                    Call Now
+                  </span>
                 </a>
               </div>
 
               {/* Trust features */}
               <div className="flex flex-wrap items-center justify-center lg:justify-end gap-4 text-surface text-[12px] font-semibold opacity-90">
                 <div className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                  <Icon icon={helpBanner.perks[0]} className="w-4 h-4 shrink-0" />
                   Quick Response
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+                  <Icon icon={helpBanner.perks[1]} className="w-4 h-4 shrink-0" />
                   100% Confidential
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="9" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
-                  </svg>
+                  <Icon icon={helpBanner.perks[2]} className="w-4 h-4 shrink-0" />
                   No Obligation
                 </div>
               </div>

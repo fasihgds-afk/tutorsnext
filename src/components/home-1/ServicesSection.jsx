@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../common/Icon';
+import { servicesHome1 } from '../../config/sectionIcons';
 
 const services = [
   {
@@ -13,26 +15,6 @@ const services = [
       'Computer Science',
       'And More',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 014 15.5v-10z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M8 7h8M8 11h8"
-        />
-      </svg>
-    ),
   },
   {
     id: 2,
@@ -46,19 +28,6 @@ const services = [
       'AP / IB / A-Level',
       'And More',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <circle cx="12" cy="12" r="9" />
-        <circle cx="12" cy="12" r="4" />
-        <path strokeLinecap="round" d="M12 3v3M21 12h-3M12 21v-3M3 12h3" />
-      </svg>
-    ),
   },
   {
     id: 3,
@@ -71,26 +40,6 @@ const services = [
       'Assignment Support',
       'Exam Practice',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 20h9"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
-        />
-      </svg>
-    ),
   },
   {
     id: 4,
@@ -103,26 +52,6 @@ const services = [
       'Exam Strategies',
       'Focus & Productivity',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 17l6-6 4 4 8-8"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M17 7h4v4"
-        />
-      </svg>
-    ),
   },
   {
     id: 5,
@@ -135,28 +64,6 @@ const services = [
       'Recorded Sessions',
       'Flexible Scheduling',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <rect
-          x="3"
-          y="5"
-          width="18"
-          height="14"
-          rx="2"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M10 9l5 3-5 3V9z"
-        />
-      </svg>
-    ),
   },
   {
     id: 6,
@@ -169,39 +76,14 @@ const services = [
       'Feedback & Improvement',
       '24/7 Student Support',
     ],
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M18 10a6 6 0 00-12 0"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 10v4a2 2 0 002 2h1M18 10v4a2 2 0 01-2 2h-1"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 20h6"
-        />
-      </svg>
-    ),
   },
 ];
 
-const ServiceCard = ({ service, showItems }) => (
+const ServiceCard = ({ service, iconIndex, showItems }) => (
   <div className="group bg-surface-alt rounded-[16px] p-4 border border-card-border hover:border-primary-border hover:shadow-md hover:-translate-y-1 transition-all duration-300">
     <div className="flex items-start gap-3 mb-3">
       <div className="w-10 h-10 rounded-xl bg-surface border border-card-border flex items-center justify-center text-brand-purple shrink-0 group-hover:bg-primary group-hover:text-surface group-hover:border-primary transition-all duration-300">
-        {service.icon}
+        <Icon icon={servicesHome1.items[iconIndex]} className="w-5 h-5" />
       </div>
       <div className="flex-1 min-w-0">
         <h3 className="text-text-dark font-bold text-[13px] mb-0.5 group-hover:text-brand-purple transition-colors duration-200">
@@ -216,9 +98,7 @@ const ServiceCard = ({ service, showItems }) => (
       {service.items.slice(0, showItems).map((item) => (
         <li key={item} className="flex items-center gap-2 text-text-body text-[11px]">
           <span className="w-3.5 h-3.5 rounded-full bg-primary-soft border border-primary-border flex items-center justify-center text-brand-purple shrink-0 group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-            <svg className="w-2 h-2" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
+            <Icon icon={servicesHome1.check} className="w-2 h-2" />
           </span>
           {item}
         </li>
@@ -268,9 +148,7 @@ const ServicesSection = () => {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-5">
                   <div className="w-12 h-12 bg-surface/20 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                    </svg>
+                    <Icon icon={servicesHome1.featured} className="w-6 h-6" />
                   </div>
                   <h3 className="text-[18px] font-bold mb-2">1-on-1 Tutoring</h3>
                   <p className="text-surface/80 text-[13px] leading-relaxed">
@@ -284,9 +162,7 @@ const ServicesSection = () => {
                     className="group/link inline-flex items-center gap-2 text-surface font-semibold text-[13px] hover:gap-3 transition-all duration-300 cursor-pointer"
                   >
                     Explore All Services
-                    <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                    </svg>
+                    <Icon icon={servicesHome1.arrow} className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
                   </button>
                 </div>
               </div>
@@ -296,8 +172,8 @@ const ServicesSection = () => {
           {/* 2×2 Service Cards */}
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-              {services.slice(0, 4).map((service) => (
-                <ServiceCard key={service.id} service={service} showItems={2} />
+              {services.slice(0, 4).map((service, i) => (
+                <ServiceCard key={service.id} service={service} iconIndex={i} showItems={2} />
               ))}
             </div>
           </div>
@@ -305,8 +181,8 @@ const ServicesSection = () => {
 
         {/* Bottom row: 2 more cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-          {services.slice(4, 6).map((service) => (
-            <ServiceCard key={service.id} service={service} showItems={3} />
+          {services.slice(4, 6).map((service, i) => (
+            <ServiceCard key={service.id} service={service} iconIndex={i + 4} showItems={3} />
           ))}
         </div>
 

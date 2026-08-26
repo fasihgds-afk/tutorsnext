@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../common/Icon';
+import { aiWarning } from '../../config/sectionIcons';
 
 const warnings = [
   {
@@ -6,44 +8,28 @@ const warnings = [
     title: 'Flagged by Detection Tools',
     description:
       'Institutions use Turnitin & GPTZero to detect AI patterns. Submissions can trigger flags and academic review.',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-      </svg>
-    ),
+    Icon: aiWarning.items[0],
   },
   {
     id: 2,
     title: 'Misconduct Investigations',
     description:
       'Submitting AI-generated content can violate academic honesty policies, leading to penalties or hearings.',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-      </svg>
-    ),
+    Icon: aiWarning.items[1],
   },
   {
     id: 3,
     title: 'Defense & Oral Explanations',
     description:
       'Professors often require students to orally defend their thesis, explain methods, and justify cited arguments.',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-      </svg>
-    ),
+    Icon: aiWarning.items[2],
   },
   {
     id: 4,
     title: 'Hallucinated Sources & Errors',
     description:
       'AI models fabricate citations and output factual inaccuracies, putting your academic grading in jeopardy.',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-      </svg>
-    ),
+    Icon: aiWarning.items[3],
   },
 ];
 
@@ -62,9 +48,7 @@ const AIWarningSection = () => {
         {/* Top Badge */}
         <div className="inline-flex items-center gap-1.5 bg-surface text-primary px-3 py-1 rounded-full text-[12px] font-semibold mb-2 shadow-xs border border-card-border">
           <span className="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-primary to-brand-end flex items-center justify-center text-white text-[9px]">
-            <svg className="w-2 h-2" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 3.75h.008v.008H12v-.008z" />
-            </svg>
+            <Icon icon={aiWarning.badge} className="w-2 h-2" strokeWidth={3} />
           </span>
           IMPORTANT NOTICE
         </div>
@@ -95,7 +79,7 @@ const AIWarningSection = () => {
 
               {/* Icon */}
               <div className="shrink-0 w-10 h-10 rounded-xl bg-primary-soft/80 border border-primary-border/60 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300 mb-3">
-                {item.icon}
+                <Icon icon={item.Icon} className="w-5 h-5" />
               </div>
 
               {/* Title */}

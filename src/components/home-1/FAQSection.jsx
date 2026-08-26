@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon';
+import { faq as faqIcons, testimonials as testimonialsIcons } from '../../config/sectionIcons';
 
 const faqs = [
   {
@@ -45,9 +47,7 @@ const FAQSection = () => {
 
         {/* Top Badge */}
         <div className="inline-flex items-center gap-2 bg-primary-soft text-brand-purple px-4 py-1.5 rounded-full text-[12px] lg:text-[13px] font-semibold mb-4 shadow-xs border border-primary-border hover:scale-105 transition-transform duration-300 cursor-default">
-          <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <Icon icon={faqIcons.badge} className="w-4 h-4 shrink-0" />
           <span>FAQS</span>
         </div>
 
@@ -73,9 +73,7 @@ const FAQSection = () => {
             {/* Icon */}
             <div className="flex justify-center mb-5">
               <div className="relative w-[64px] h-[64px] rounded-full bg-primary-soft border border-primary-border flex items-center justify-center text-brand-purple hover:scale-110 transition-transform duration-300">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <Icon icon={faqIcons.badge} className="w-7 h-7" />
                 <div className="absolute bottom-0.5 right-0.5 w-5 h-5 bg-primary rounded-full border-2 border-surface flex items-center justify-center text-surface text-[9px] font-bold">
                   ?
                 </div>
@@ -97,26 +95,24 @@ const FAQSection = () => {
               <button
                 type="button"
                 onClick={() => { if (window.Tawk_API?.maximize) window.Tawk_API.maximize(); }}
-                className="group w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-start to-brand-end text-surface text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-[0_4px_12px_rgba(2,132,199,0.25)] hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(2,132,199,0.35)] active:scale-[0.97] transition-all duration-200 cursor-pointer"
+                className="btn-fill-hover w-full flex items-center justify-center gap-2 text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-[0_4px_12px_rgba(2,132,199,0.25)] cursor-pointer"
               >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                Chat with Us Now
-                <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Icon icon={faqIcons.chat} className="w-4 h-4" />
+                  Chat with Us Now
+                  <Icon icon={testimonialsIcons.chevronRight} className="w-4 h-4" />
+                </span>
               </button>
 
               <a
                 href={SITE_CONFIG.email.href}
-                className="group w-full flex items-center justify-center gap-2 bg-surface hover:bg-primary-soft text-text-body border border-card-border hover:border-primary-border text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-sm hover:scale-[1.02] active:scale-[0.97] transition-all duration-200"
+                className="btn-fill-hover-outline w-full flex items-center justify-center gap-2 text-[13.5px] font-bold py-3 px-4 rounded-[14px] shadow-sm"
               >
-                <svg className="w-4 h-4 text-brand-purple group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Email Us
-                <span className="text-text-body font-normal text-[12px] opacity-60">{SITE_CONFIG.email.display}</span>
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Icon icon={faqIcons.email} className="w-4 h-4 text-brand-purple" />
+                  Email Us
+                  <span className="text-text-body font-normal text-[12px] opacity-60">{SITE_CONFIG.email.display}</span>
+                </span>
               </a>
             </div>
 
@@ -164,12 +160,10 @@ const FAQSection = () => {
                       {faq.question}
                     </span>
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen ? 'bg-primary-soft border border-primary-border text-brand-purple' : 'bg-surface-alt border border-card-border text-text-body group-hover:border-primary-border group-hover:text-brand-purple'}`}>
-                      <svg
+                      <Icon
+                        icon={faqIcons.chevron}
                         className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                        fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
+                      />
                     </div>
                   </button>
 

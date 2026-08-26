@@ -1,5 +1,7 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from '../common/Icon';
+import { supportBanner } from '../../config/sectionIcons';
 
 const SupportBannerSection = () => {
   return (
@@ -24,15 +26,11 @@ const SupportBannerSection = () => {
               {/* Support Avatar */}
               <div className="relative shrink-0">
                 <div className="w-[64px] h-[64px] rounded-full bg-surface flex items-center justify-center shadow-md hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-brand-purple" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z" />
-                  </svg>
+                  <Icon icon={supportBanner.avatar} className="w-8 h-8 text-brand-purple" />
                 </div>
                 {/* Online badge */}
                 <div className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-primary-200 border-2 border-brand-start flex items-center justify-center">
-                  <svg className="w-2.5 h-2.5 text-surface" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
+                  <Icon icon={supportBanner.online} className="w-2.5 h-2.5 text-surface fill-current" />
                 </div>
               </div>
 
@@ -53,23 +51,23 @@ const SupportBannerSection = () => {
               {/* Phone */}
               <a
                 href={SITE_CONFIG.phone.href}
-                className="group inline-flex items-center justify-center gap-2 bg-surface hover:bg-primary-50 text-brand-purple text-[14px] font-bold px-5 py-2.5 rounded-[12px] shadow-sm hover:scale-[1.03] hover:shadow-md active:scale-[0.97] transition-all duration-200 whitespace-nowrap"
+                className="btn-fill-hover inline-flex items-center justify-center gap-2 text-[14px] font-bold px-5 py-2.5 rounded-[12px] shadow-sm whitespace-nowrap"
               >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {SITE_CONFIG.phone.display}
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Icon icon={supportBanner.phone} className="w-4 h-4" />
+                  {SITE_CONFIG.phone.display}
+                </span>
               </a>
 
               {/* Email */}
               <a
                 href={SITE_CONFIG.email.href}
-                className="group inline-flex items-center justify-center gap-2 bg-transparent hover:bg-surface/10 text-surface border border-surface/40 hover:border-surface/70 text-[14px] font-bold px-5 py-2.5 rounded-[12px] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 whitespace-nowrap"
+                className="btn-fill-hover-ghost inline-flex items-center justify-center gap-2 text-[14px] font-bold px-5 py-2.5 rounded-[12px] whitespace-nowrap"
               >
-                <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {SITE_CONFIG.email.display}
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Icon icon={supportBanner.email} className="w-4 h-4" />
+                  {SITE_CONFIG.email.display}
+                </span>
               </a>
 
             </div>

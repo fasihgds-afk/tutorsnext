@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../../../components/common/Icon.jsx';
+import { orders } from '../../../config/sectionIcons.js';
 
 const OrderRequirementsForm = ({ formData, setFormData }) => {
   const handleChange = (field, value) => {
@@ -61,7 +63,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>Assignment</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -77,7 +79,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>Doctoral</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -99,7 +101,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>Engineering</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -122,7 +124,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option value="12 hours">12 hours</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -155,7 +157,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
               <option>1.5 Line Space</option>
             </select>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <Icon icon={orders.chevron} className="w-4 h-4" />
             </span>
           </div>
         </div>
@@ -180,7 +182,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>Harvard</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -205,7 +207,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>Arial</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>
@@ -219,7 +221,7 @@ const OrderRequirementsForm = ({ formData, setFormData }) => {
             <option>UK English</option>
           </select>
           <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            <Icon icon={orders.chevron} className="w-4 h-4" />
           </span>
         </div>
       </div>

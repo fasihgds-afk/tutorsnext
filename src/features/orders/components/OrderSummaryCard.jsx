@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../../../components/common/Icon.jsx';
+import { orders } from '../../../config/sectionIcons.js';
 
 const OrderSummaryCard = ({
   formData,
@@ -110,19 +112,17 @@ const OrderSummaryCard = ({
       <button
         type="button"
         onClick={onConfirm}
-        className="w-full bg-primary hover:bg-primary-hover active:scale-[0.98] text-white text-sm sm:text-base font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
+        className="btn-fill-hover w-full text-sm sm:text-base font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-sky-600/25 flex items-center justify-center gap-2 cursor-pointer mt-1"
       >
-        <span>CONFIRM ORDER</span>
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-        </svg>
+        <span className="inline-flex items-center justify-center gap-2">
+          <span>CONFIRM ORDER</span>
+          <Icon icon={orders.arrow} className="w-4 h-4" strokeWidth={2.5} />
+        </span>
       </button>
 
       {/* Micro trust guarantee */}
       <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500 text-center mt-0.5">
-        <svg className="w-3.5 h-3.5 text-sky-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
-        </svg>
+        <Icon icon={orders.ssl} className="w-3.5 h-3.5 text-sky-600 shrink-0" />
         <span>256-Bit SSL Encrypted &amp; 100% Guaranteed</span>
       </div>
     </div>

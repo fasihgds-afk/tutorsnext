@@ -63,9 +63,9 @@ const PlaceOrder = () => {
               <button
                 type="button"
                 onClick={handleConfirmOrder}
-                className="bg-primary hover:bg-primary-hover text-white text-sm font-bold py-3 px-10 transition-colors cursor-pointer"
+                className="btn-fill-hover text-sm font-bold py-3 px-10 cursor-pointer"
               >
-                CONFIRM ORDER
+                <span>CONFIRM ORDER</span>
               </button>
             </div>
           </div>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Icon from '../../../components/common/Icon.jsx';
+import { dashboard } from '../../../config/sectionIcons.js';
 
 const StudentDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,9 +18,9 @@ const StudentDashboard = () => {
 
           <Link
             to="/order/placeorder"
-            className="bg-primary hover:bg-primary-hover text-white text-sm font-semibold py-2.5 px-6 rounded-md transition-colors"
+            className="btn-fill-hover text-sm font-semibold py-2.5 px-6 rounded-md"
           >
-            Place New Order
+            <span>Place New Order</span>
           </Link>
         </div>
 
@@ -43,9 +45,7 @@ const StudentDashboard = () => {
                   className="w-full pl-3 pr-8 py-1.5 border border-slate-300 rounded-full text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-primary"
                 />
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-slate-400">
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                  </svg>
+                  <Icon icon={dashboard.search} className="w-3.5 h-3.5" />
                 </span>
               </div>
             </div>
@@ -87,12 +87,7 @@ const StudentDashboard = () => {
 
               {/* Background 24/7 Clock Watermark */}
               <div className="absolute right-3 top-14 opacity-10 pointer-events-none select-none">
-                <svg className="w-36 h-36 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
-                  <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="6" fill="none" />
-                  <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="32" fontWeight="bold">
-                    24
-                  </text>
-                </svg>
+                <Icon icon={dashboard.clock} className="w-36 h-36 text-slate-800" strokeWidth={1} />
               </div>
 
               {/* Support Items List */}
@@ -103,7 +98,7 @@ const StudentDashboard = () => {
                   href="#"
                   className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
-                  <span className="text-primary text-base">🎧</span>
+                  <Icon icon={dashboard.chat} className="w-4 h-4 text-primary" />
                   <span className="font-medium">Chat with a Representative</span>
                 </a>
 
@@ -112,7 +107,7 @@ const StudentDashboard = () => {
                   href="tel:+18776578180"
                   className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
-                  <span className="text-primary text-base">📞</span>
+                  <Icon icon={dashboard.phone} className="w-4 h-4 text-primary" />
                   <span className="font-medium">Request Call Back</span>
                 </a>
 
@@ -121,7 +116,7 @@ const StudentDashboard = () => {
                   to="/order/placeorder"
                   className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
-                  <span className="text-primary text-base">📝</span>
+                  <Icon icon={dashboard.inquiry} className="w-4 h-4 text-primary" />
                   <span className="font-medium">Free Inquiry</span>
                 </Link>
 
@@ -130,7 +125,7 @@ const StudentDashboard = () => {
                   href="mailto:support@tutorsnext.com"
                   className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
-                  <span className="text-primary text-base">✉️</span>
+                  <Icon icon={dashboard.email} className="w-4 h-4 text-primary" />
                   <span className="font-medium">support@tutorsnext.com</span>
                 </a>
 
@@ -139,7 +134,7 @@ const StudentDashboard = () => {
                   href="tel:+18776578180"
                   className="flex items-center gap-3 px-4 py-3 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
                 >
-                  <span className="text-primary text-base">📞</span>
+                  <Icon icon={dashboard.phone} className="w-4 h-4 text-primary" />
                   <span className="font-semibold">+92-329-5128671</span>
                 </a>
 
@@ -149,9 +144,9 @@ const StudentDashboard = () => {
             {/* Place New Order Button */}
             <Link
               to="/order/placeorder"
-              className="w-full text-center bg-primary hover:bg-primary-hover text-white text-sm font-semibold py-3 px-4 rounded-md transition-colors block"
+              className="btn-fill-hover w-full text-center text-sm font-semibold py-3 px-4 rounded-md block"
             >
-              Place New Order
+              <span>Place New Order</span>
             </Link>
 
           </div>

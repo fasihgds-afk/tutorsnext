@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import Icon from './Icon.jsx';
+import { footer } from '../../config/sectionIcons.js';
 
 const Footer1 = () => {
   const navigate = useNavigate();
@@ -98,34 +100,25 @@ const Footer1 = () => {
             <ul className="space-y-3">
               <li>
                 <a href={home1Phone.href} className="flex items-center gap-2.5 text-slate-400 hover:text-sky-400 text-xs sm:text-sm transition-colors">
-                  <svg className="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                  </svg>
+                  <Icon icon={footer.phone} className="w-4 h-4 text-sky-400 shrink-0" />
                   {home1Phone.display}
                 </a>
               </li>
               <li>
                 <a href={SITE_CONFIG.email.href} className="flex items-center gap-2.5 text-slate-400 hover:text-sky-400 text-xs sm:text-sm transition-colors">
-                  <svg className="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  <Icon icon={footer.email} className="w-4 h-4 text-sky-400 shrink-0" />
                   {SITE_CONFIG.email.display}
                 </a>
               </li>
               <li>
                 <span className="flex items-center gap-2.5 text-slate-400 text-xs sm:text-sm">
-                  <svg className="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
+                  <Icon icon={footer.chat} className="w-4 h-4 text-sky-400 shrink-0" />
                   24/7 Live Support Team
                 </span>
               </li>
               <li>
                 <span className="flex items-start gap-2.5 text-slate-400 text-xs sm:text-sm">
-                  <svg className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
+                  <Icon icon={footer.location} className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>Office # 2, Choudhary Plaza, 2nd Floor, Plot 6/7 N Main Block Swan Garden , Islamabad , Islamabad Rural , Islamabad Capital Territory</span>
                 </span>
               </li>
@@ -182,9 +175,7 @@ const Footer1 = () => {
             <div className="flex items-center gap-5">
               {/* SSL */}
               <div className="flex items-center gap-1.5 text-slate-300">
-                <svg className="w-4 h-4 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
-                </svg>
+                <Icon icon={footer.ssl} className="w-4 h-4 text-sky-400" />
                 <div className="leading-tight text-left">
                   <div className="text-[9.5px] font-bold text-slate-400">256-BIT SSL</div>
                   <div className="text-[10.5px] font-extrabold text-white">ENCRYPTED</div>
@@ -193,9 +184,7 @@ const Footer1 = () => {
 
               {/* McAfee */}
               <div className="flex items-center gap-1.5 text-slate-300">
-                <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
-                </svg>
+                <Icon icon={footer.secure} className="w-4 h-4 text-red-500" />
                 <div className="leading-tight text-left">
                   <div className="text-[9.5px] font-bold text-slate-400">McAfee</div>
                   <div className="text-[10.5px] font-extrabold text-white">SECURE</div>
