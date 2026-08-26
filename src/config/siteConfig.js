@@ -18,12 +18,12 @@ export const SITE_CONFIG = {
     favicon: '/images/Favicon TutorsNext.png',
   },
   phone: {
-    display: '+1 (914) 515-4875',
-    href: 'tel:+19145154875',
+    display: '+1 (406) 820 5727',
+    href: 'tel:+14068205727',
   },
   phoneHome: {
-    display: '+1 (914) 515-4875',
-    href: 'tel:+19145154875',
+   display: '+1 (406) 820 5727',
+    href: 'tel:+14068205727',
   },
   phoneHome1: {
     display: '+92 344 7990137',
