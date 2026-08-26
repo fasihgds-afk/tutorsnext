@@ -39,9 +39,9 @@ const Navbar = () => {
           {/* Left: Logo */}
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src={SITE_CONFIG.logo.src}
+              src={SITE_CONFIG.logo.header.src}
               alt={SITE_CONFIG.logo.alt}
-              className={SITE_CONFIG.logo.navClassName}
+              className={SITE_CONFIG.logo.header.className}
             />
           </Link>
 

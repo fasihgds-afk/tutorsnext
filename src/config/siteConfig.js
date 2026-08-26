@@ -6,10 +6,16 @@
 
 export const SITE_CONFIG = {
   logo: {
-    src: '/images/tutorsnext-logo.png',
     alt: 'TutorsNext',
-    navClassName: 'h-9 w-auto sm:h-9',
-    footerClassName: 'h-12 w-auto',
+    header: {
+      src: '/images/tutorsnext-logo.png',
+      className: 'h-7 w-auto sm:h-7',
+    },
+    footer: {
+      src: '/images/TutorsNext White.png',
+      className: 'h-10 w-auto',
+    },
+    favicon: '/images/Favicon TutorsNext.png',
   },
   phone: {
     display: '+1 (914) 515-4875',

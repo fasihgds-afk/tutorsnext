@@ -32,9 +32,9 @@ const Footer = () => {
             {/* Brand Logo */}
             <Link to="/" className="flex items-center mb-5 group w-fit">
               <img
-                src={SITE_CONFIG.logo.src}
+                src={SITE_CONFIG.logo.footer.src}
                 alt={SITE_CONFIG.logo.alt}
-                className={SITE_CONFIG.logo.footerClassName}
+                className={SITE_CONFIG.logo.footer.className}
               />
             </Link>
 
