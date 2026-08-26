@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SITE_CONFIG } from '../../../config/siteConfig';
 
 const ReviewsBanner = () => {
   return (
@@ -9,8 +10,12 @@ const ReviewsBanner = () => {
 
         {/* Brand Info */}
         <div className="flex flex-col gap-0.5 ml-10">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-extrabold tracking-tight">TutorsNext</span>
+          <div className="flex items-center gap-3">
+            <img
+              src={SITE_CONFIG.logo.src}
+              alt={SITE_CONFIG.logo.alt}
+              className={SITE_CONFIG.logo.navClassName}
+            />
             <span className="bg-white/20 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">✓</span>
           </div>
           <div className="flex items-center gap-2 text-[13px] text-white/90 font-medium">

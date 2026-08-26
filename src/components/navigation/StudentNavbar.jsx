@@ -21,35 +21,12 @@ const StudentNavbar = () => {
 
           {/* Left: Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2.5 group">
-              {/* Logo Icon */}
-              <div className="w-10 h-10 flex items-center justify-center">
-                <svg className="w-full h-full" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 5L30 10L20 15L10 10L20 5Z" fill="url(#paint0_linear_student)" />
-                  <path d="M12 16.5V23C12 27.5 15.5 31 20 31C24.5 31 28 27.5 28 23V16.5" stroke="url(#paint1_linear_student)" strokeWidth="2.5" strokeLinecap="round" />
-                  <path d="M16 20L20 23L24 20" stroke="url(#paint2_linear_student)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="31" cy="7" r="2" fill="var(--color-brand-end, #38BDF8)" />
-                  <defs>
-                    <linearGradient id="paint0_linear_student" x1="10" y1="5" x2="30" y2="15" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="var(--color-brand-start, #0284C7)" />
-                      <stop offset="1" stopColor="var(--color-brand-end, #38BDF8)" />
-                    </linearGradient>
-                    <linearGradient id="paint1_linear_student" x1="12" y1="16.5" x2="28" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="var(--color-brand-start, #0284C7)" />
-                      <stop offset="1" stopColor="var(--color-brand-end, #38BDF8)" />
-                    </linearGradient>
-                    <linearGradient id="paint2_linear_student" x1="16" y1="20" x2="24" y2="23" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="var(--color-brand-start, #0284C7)" />
-                      <stop offset="1" stopColor="var(--color-brand-end, #38BDF8)" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-
-              {/* Logo Text */}
-              <span className="text-2xl font-bold tracking-tight text-slate-900">
-                Tutors<span className="text-primary">Next</span>
-              </span>
+            <Link to="/" className="flex items-center shrink-0 group">
+              <img
+                src={SITE_CONFIG.logo.src}
+                alt={SITE_CONFIG.logo.alt}
+                className={SITE_CONFIG.logo.navClassName}
+              />
             </Link>
           </div>
 

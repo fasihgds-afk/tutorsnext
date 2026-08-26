@@ -33,9 +33,9 @@ const Footer1 = () => {
             {/* Brand Logo */}
             <Link to="/home-1" className="flex items-center mb-5 group w-fit">
               <img
-                src="/TutorsNext Logo White.svg"
-                alt="TutorsNext"
-                className="h-5 w-auto"
+                src={SITE_CONFIG.logo.src}
+                alt={SITE_CONFIG.logo.alt}
+                className={SITE_CONFIG.logo.footerClassName}
               />
             </Link>
 
