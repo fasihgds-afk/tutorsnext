@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../../config/siteConfig';
 import Icon from '../common/Icon';
 import { ctaBanner } from '../../config/sectionIcons';
+
+const scrollToHero = () => {
+  const el = document.getElementById('hero');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 const CTABannerSection = () => {
   return (
@@ -50,12 +53,14 @@ const CTABannerSection = () => {
               ))}
             </ul>
 
-            <Link to={SITE_CONFIG.routes.login}
-              className="btn-fill-hover w-full inline-flex items-center justify-center gap-2 font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(2,132,199,0.3)]">
+            <button
+              type="button"
+              onClick={scrollToHero}
+              className="btn-fill-hover w-full inline-flex items-center justify-center gap-2 font-semibold text-[13.5px] py-3 px-5 rounded-[10px] shadow-[0_4px_12px_rgba(2,132,199,0.3)] cursor-pointer">
               <span className="inline-flex items-center justify-center gap-2">
                 Book Your Demo <span className="text-base leading-none">&rarr;</span>
               </span>
-            </Link>
+            </button>
           </div>
 
         </div>

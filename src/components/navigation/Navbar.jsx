@@ -10,10 +10,14 @@ const Navbar = () => {
   const location = useLocation();
 
   const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
+  const activeIsHome1 = activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1';
+
   const isHome1 =
     location.pathname.startsWith('/home-1') ||
     location.pathname.startsWith('/home1') ||
-    (location.pathname === '/' && (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1'));
+    (location.pathname === '/' && activeIsHome1) ||
+    // Shared pages (reviews, etc.) inherit home-1 context when activeHome is home-1
+    (activeIsHome1 && !location.pathname.startsWith('/home') && !location.pathname.startsWith('/login') && !location.pathname.startsWith('/register') && !location.pathname.startsWith('/account'));
 
   const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
 
@@ -106,16 +110,29 @@ const Navbar = () => {
               </Link>
             )}
 
-            {/* Login */}
-            <Link
-              to={SITE_CONFIG.routes.login}
-              className="btn-fill-hover-outline flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap"
-            >
-              <span className="inline-flex items-center gap-2">
-                <span>Login</span>
-                <Icon icon={nav.user} className="w-4 h-4 shrink-0" />
-              </span>
-            </Link>
+            {/* Login — hidden on Home-1; replaced with scroll-to-form CTA */}
+            {isHome1 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('hero');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full whitespace-nowrap border-2 border-primary text-primary bg-primary-soft hover:bg-primary hover:text-white transition-colors duration-200"
+              >
+                Get Started
+              </button>
+            ) : (
+              <Link
+                to={SITE_CONFIG.routes.login}
+                className="btn-fill-hover-outline flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <span>Login</span>
+                  <Icon icon={nav.user} className="w-4 h-4 shrink-0" />
+                </span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -195,16 +212,33 @@ const Navbar = () => {
                   </span>
                 </Link>
               )}
-              <Link
-                to={SITE_CONFIG.routes.login}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-fill-hover-outline flex items-center justify-center rounded-full px-5 py-2 font-semibold"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <span>Login</span>
-                  <Icon icon={nav.user} className="w-5 h-5" />
-                </span>
-              </Link>
+              {/* Login — hidden on Home-1; replaced with scroll-to-form CTA */}
+              {isHome1 ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setTimeout(() => {
+                      const el = document.getElementById('hero');
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50);
+                  }}
+                  className="flex items-center justify-center rounded-full px-5 py-2 font-semibold border-2 border-primary text-primary bg-primary-soft hover:bg-primary hover:text-white transition-colors duration-200"
+                >
+                  Get Started
+                </button>
+              ) : (
+                <Link
+                  to={SITE_CONFIG.routes.login}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn-fill-hover-outline flex items-center justify-center rounded-full px-5 py-2 font-semibold"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <span>Login</span>
+                    <Icon icon={nav.user} className="w-5 h-5" />
+                  </span>
+                </Link>
+              )}
             </div>
           </div>
         )}

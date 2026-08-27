@@ -43,8 +43,7 @@ const Footer1 = () => {
 
             {/* Tagline */}
             <p className="text-slate-400 text-sm leading-relaxed max-w-[340px] mb-6">
-              Your trusted partner for high-quality academic tutoring. We're here to support your academic success at every step.
-            </p>
+             Your trusted partner for high-quality academic tutoring service. We're here to support your academic success at every step. </p>
 
           </div>
 

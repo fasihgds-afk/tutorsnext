@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../../config/siteConfig';
 import Icon from '../common/Icon';
 import { howItWorksHome1 } from '../../config/sectionIcons';
+
+const scrollToHero = () => {
+  const el = document.getElementById('hero');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 const steps = [
   {
@@ -91,12 +94,14 @@ const HowItWorksSection = () => {
 
         {/* CTA Button */}
         <div className="mt-10 w-full flex justify-center">
-          <Link to={SITE_CONFIG.routes.login}
-            className="btn-fill-hover inline-flex items-center justify-center gap-2 font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(2,132,199,0.3)] w-full max-w-xs lg:w-auto">
+          <button
+            type="button"
+            onClick={scrollToHero}
+            className="btn-fill-hover inline-flex items-center justify-center gap-2 font-semibold text-[14px] py-3 px-8 rounded-[12px] shadow-[0_4px_16px_rgba(2,132,199,0.3)] w-full max-w-xs lg:w-auto cursor-pointer">
             <span className="inline-flex items-center justify-center gap-2">
               Get Started Now <span className="text-base leading-none">&rarr;</span>
             </span>
-          </Link>
+          </button>
         </div>
 
       </div>

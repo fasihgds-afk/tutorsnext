@@ -35,7 +35,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
+    <section id="hero" className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
 
         {/* Overlapping Image — desktop only */}

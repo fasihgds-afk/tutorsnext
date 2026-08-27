@@ -3,6 +3,10 @@ import { SITE_CONFIG } from '../../../config/siteConfig';
 import Icon from '../../../components/common/Icon.jsx';
 import { reviews } from '../../../config/sectionIcons.js';
 
+const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
+const isHome1 = activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1';
+const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
+
 const ReviewsSupportWidget = () => {
   return (
     <div className="bg-white rounded-[20px] border border-[#f1f5f9] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col gap-3">
@@ -20,14 +24,14 @@ const ReviewsSupportWidget = () => {
       {/* Buttons */}
       <div className="flex flex-col gap-2 pt-1">
         <a
-          href={SITE_CONFIG.whatsapp.href}
+          href={currentPhone.href}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-fill-hover-outline flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-[13px] font-semibold"
         >
           <span className="inline-flex items-center gap-2.5">
             <Icon icon={reviews.phone} className="w-4 h-4 text-primary shrink-0" />
-            Call {SITE_CONFIG.phone.display}
+            Call {currentPhone.display}
           </span>
         </a>
 
@@ -48,7 +52,7 @@ const ReviewsSupportWidget = () => {
         >
           <span className="inline-flex items-center gap-2.5">
             <Icon icon={reviews.email} className="w-4 h-4 text-primary shrink-0" />
-            Email Support
+            {SITE_CONFIG.email.display}
           </span>
         </a>
       </div>
