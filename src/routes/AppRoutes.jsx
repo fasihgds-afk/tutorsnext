@@ -9,11 +9,16 @@ import Login from '../features/auth/pages/Login';
 import PlaceOrder from '../features/orders/pages/PlaceOrder';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
 import Reviews from '../features/reviews/pages/Reviews';
-import { SITE_CONFIG } from '../config/siteConfig';
+import { HOME_1_SEO_ROUTES, checkIsActiveHome1, checkIsHome1Path } from '../config/homeConfig';
+
+// Dynamic SEO route component rendering Home or Home-1 according to configuration
+const DynamicSEORoute = ({ path }) => {
+  const isH1 = checkIsHome1Path(path);
+  return isH1 ? <Home1 /> : <Home />;
+};
 
 const AppRoutes = () => {
-  const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
-  const ActiveHome = (activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1') ? Home1 : Home;
+  const ActiveHome = checkIsActiveHome1() ? Home1 : Home;
 
   return (
     <Routes>
@@ -23,6 +28,12 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/home-1" element={<Home1 />} />
         <Route path="/home1" element={<Home1 />} />
+
+        {/* SEO Landing Routes (Configured in homeConfig.js) */}
+        {HOME_1_SEO_ROUTES.map((routePath) => (
+          <Route key={routePath} path={routePath} element={<DynamicSEORoute path={routePath} />} />
+        ))}
+
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/account/register" element={<Register />} />
         <Route path="/register" element={<Register />} />

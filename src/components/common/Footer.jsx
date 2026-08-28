@@ -1,24 +1,12 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from './Icon.jsx';
 import { footer } from '../../config/sectionIcons.js';
 
 const Footer = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const homePhone = SITE_CONFIG.phoneHome || SITE_CONFIG.phone;
-
-  const handleHashLink = (e, hash) => {
-    e.preventDefault();
-    if (location.pathname === '/' || location.pathname === '/home') {
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      navigate(`/#${hash}`);
-    }
-  };
+  const { phone: homePhone, handleHashLink } = useHomeContext();
   return (
     <footer className="w-full bg-slate-950 font-sans antialiased text-slate-300 pt-16 pb-10 border-t border-slate-800/80 relative overflow-hidden">
       {/* Subtle emerald ambient glow in background */}

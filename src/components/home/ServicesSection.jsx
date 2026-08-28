@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon';
 import { services } from '../../config/sectionIcons';
 
 const ServicesSection = () => {
-  const phone = SITE_CONFIG.phoneHome || SITE_CONFIG.phone;
+  const { phone } = useHomeContext();
 
   const documentTypes = [
     { label: 'Essays', href: SITE_CONFIG.routes.register },

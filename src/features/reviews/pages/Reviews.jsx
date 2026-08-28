@@ -4,13 +4,13 @@ import ReviewsHeader from '../components/ReviewsHeader';
 import ReviewCard from '../components/ReviewCard';
 import WhyChooseUs from '../components/WhyChooseUs';
 import ReviewsSupportWidget from '../components/ReviewsSupportWidget';
-import { SITE_CONFIG } from '../../../config/siteConfig';
+import { useHomeContext } from '../../../hooks/useHomeContext';
 import { reviewsHome, reviewsHome1 } from '../data/reviewsData';
 
-// Pick the correct review dataset based on the active home variant
-const reviews = SITE_CONFIG.activeHome === 'home' ? reviewsHome : reviewsHome1;
-
 const Reviews = () => {
+  const { isHome1 } = useHomeContext();
+  const reviews = isHome1 ? reviewsHome1 : reviewsHome;
+
   return (
     <main className="w-full min-h-screen bg-[#f8fafc]">
       {/* Top Banner */}

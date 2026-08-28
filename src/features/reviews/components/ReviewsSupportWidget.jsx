@@ -1,13 +1,11 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../../config/siteConfig';
+import { useHomeContext } from '../../../hooks/useHomeContext';
 import Icon from '../../../components/common/Icon.jsx';
 import { reviews } from '../../../config/sectionIcons.js';
 
-const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
-const isHome1 = activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1';
-const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
-
 const ReviewsSupportWidget = () => {
+  const { phone: currentPhone } = useHomeContext();
   return (
     <div className="bg-white rounded-[20px] border border-[#f1f5f9] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col gap-3">
 

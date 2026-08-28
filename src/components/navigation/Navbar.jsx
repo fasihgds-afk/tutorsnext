@@ -1,40 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon.jsx';
 import { nav } from '../../config/sectionIcons.js';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { isHome1, phone: currentPhone, handleHashLink } = useHomeContext();
 
-  const activeHomeVal = String(SITE_CONFIG.activeHome || '').trim().toLowerCase();
-  const activeIsHome1 = activeHomeVal === 'home-1' || activeHomeVal === 'home1' || activeHomeVal === '1';
-
-  const isHome1 =
-    location.pathname.startsWith('/home-1') ||
-    location.pathname.startsWith('/home1') ||
-    (location.pathname === '/' && activeIsHome1) ||
-    // Shared pages (reviews, etc.) inherit home-1 context when activeHome is home-1
-    (activeIsHome1 && !location.pathname.startsWith('/home') && !location.pathname.startsWith('/login') && !location.pathname.startsWith('/register') && !location.pathname.startsWith('/account'));
-
-  const currentPhone = isHome1 ? (SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone) : (SITE_CONFIG.phoneHome || SITE_CONFIG.phone);
-
-  /**
-   * For hash links: if already on home, scroll directly.
-   * If on another page, navigate to /#hash and ScrollToHash handles the rest.
-   */
-  const handleHashLink = (e, hash) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    if (location.pathname === '/' || location.pathname === '/home' || location.pathname === '/home-1' || location.pathname === '/home1') {
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      const targetHome = isHome1 ? '/home-1' : '/';
-      navigate(`${targetHome}#${hash}`);
-    }
+  const onNavHashClick = (e, hash) => {
+    handleHashLink(e, hash, () => setIsMobileMenuOpen(false));
   };
 
   return (
@@ -158,14 +134,14 @@ const Navbar = () => {
           <div className="md:hidden border-t border-gray-100 py-4 space-y-1">
             <a
               href="/#top-writers"
-              onClick={(e) => handleHashLink(e, 'top-writers')}
+              onClick={(e) => onNavHashClick(e, 'top-writers')}
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 cursor-pointer"
             >
               {isHome1 ? 'Top Tutors' : 'Top Writers'}
             </a>
             <a
               href="/#how-it-works"
-              onClick={(e) => handleHashLink(e, 'how-it-works')}
+              onClick={(e) => onNavHashClick(e, 'how-it-works')}
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 cursor-pointer"
             >
               How It Works
@@ -179,14 +155,14 @@ const Navbar = () => {
             </Link>
             <a
               href="/#services"
-              onClick={(e) => handleHashLink(e, 'services')}
+              onClick={(e) => onNavHashClick(e, 'services')}
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 cursor-pointer"
             >
               Services
             </a>
             <a
               href="/#faqs"
-              onClick={(e) => handleHashLink(e, 'faqs')}
+              onClick={(e) => onNavHashClick(e, 'faqs')}
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-primary hover:bg-gray-50 cursor-pointer"
             >
               FAQs

@@ -22,7 +22,7 @@ export const SITE_CONFIG = {
     href: 'tel:+14068205727',
   },
   phoneHome: {
-   display: '+1 (406) 820 5727',
+    display: '+1 (406) 820 5727',
     href: 'tel:+14068205727',
   },
   phoneHome1: {
@@ -44,3 +44,8 @@ export const SITE_CONFIG = {
     login: '/login',
   },
 };
+
+// Re-export centralized home & SEO helpers for backward compatibility
+export { HOME_1_SEO_ROUTES, checkIsHome1Path as isHome1Route } from './homeConfig';
+
+

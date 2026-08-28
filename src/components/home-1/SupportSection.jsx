@@ -1,5 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon';
 import { support as supportIcons } from '../../config/sectionIcons';
 
@@ -35,6 +36,8 @@ const features = [
 ];
 
 const SupportSection = () => {
+  const { phone } = useHomeContext();
+
   return (
     <section className="w-full bg-surface-alt py-10 lg:py-14 px-4 sm:px-10 lg:px-16 xl:px-20">
       <div className="w-full max-w-[1040px] mx-auto flex flex-col items-center">
@@ -137,11 +140,11 @@ const SupportSection = () => {
               <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
 
 
-                <a href={SITE_CONFIG.phoneHome1.href}
+                <a href={phone.href}
                   className="btn-fill-hover inline-flex items-center justify-center gap-2 text-[13.5px] font-bold px-5 py-2.5 rounded-[12px] w-full sm:w-auto whitespace-nowrap">
                   <span className="inline-flex items-center justify-center gap-2">
                     <Icon icon={supportIcons.trust[0]} className="w-4 h-4" />
-                    {SITE_CONFIG.phoneHome1.display}
+                    {phone.display}
                   </span>
                 </a>
 

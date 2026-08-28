@@ -1,5 +1,6 @@
 import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon';
 import { helpBanner, hero, servicesHome1 } from '../../config/sectionIcons';
 
@@ -10,7 +11,7 @@ const trustPerks = [
 ];
 
 const HelpBannerSection = () => {
-  const phone = SITE_CONFIG.phoneHome || SITE_CONFIG.phone;
+  const { phone } = useHomeContext();
 
   return (
     <section className="w-full bg-surface py-10 px-4 sm:px-10 lg:px-16 xl:px-20">

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon.jsx';
 import { studentNav } from '../../config/sectionIcons.js';
 
 const StudentNavbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const phone = SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone;
+  const { phone } = useHomeContext();
 
   const handleLogout = () => {
     // Clear tokens/session if needed

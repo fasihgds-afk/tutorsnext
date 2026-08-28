@@ -1,24 +1,12 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../config/siteConfig';
+import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from './Icon.jsx';
 import { footer } from '../../config/sectionIcons.js';
 
 const Footer1 = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const home1Phone = SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone;
-
-  const handleHashLink = (e, hash) => {
-    e.preventDefault();
-    if (location.pathname === '/home-1' || location.pathname === '/home1' || location.pathname === '/') {
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      navigate(`/home-1#${hash}`);
-    }
-  };
+  const { phone: home1Phone, handleHashLink, homePath } = useHomeContext();
 
   return (
     <footer className="w-full bg-slate-950 font-sans antialiased text-slate-300 pt-16 pb-10 border-t border-slate-800/80 relative overflow-hidden">
@@ -33,7 +21,7 @@ const Footer1 = () => {
           {/* Column 1: Logo & Description (Span 2 on lg) */}
           <div className="lg:col-span-2 flex flex-col pr-0 lg:pr-8">
             {/* Brand Logo */}
-            <Link to="/home-1" className="flex items-center mb-5 group w-fit">
+            <Link to={homePath} className="flex items-center mb-5 group w-fit">
               <img
                 src={SITE_CONFIG.logo.footer.src}
                 alt={SITE_CONFIG.logo.alt}
@@ -51,12 +39,12 @@ const Footer1 = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Our Services</h3>
             <ul className="space-y-3">
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Subject Tutoring</a></li>
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Test Preparation</a></li>
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Professional Guidance</a></li>
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Study Skills Coaching</a></li>
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Live Online Classes</a></li>
-              <li><a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Academic Support</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Subject Tutoring</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Test Preparation</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Professional Guidance</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Study Skills Coaching</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Live Online Classes</a></li>
+              <li><a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">Academic Support</a></li>
             </ul>
           </div>
 
@@ -64,14 +52,14 @@ const Footer1 = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link to="/home-1" className="text-slate-400 hover:text-sky-400 text-sm transition-colors">Home</Link></li>
+              <li><Link to={homePath} className="text-slate-400 hover:text-sky-400 text-sm transition-colors">Home</Link></li>
               <li>
-                <a href="/home-1#top-writers" onClick={(e) => handleHashLink(e, 'top-writers')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
+                <a href="/#top-writers" onClick={(e) => handleHashLink(e, 'top-writers')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
                   Top Tutors
                 </a>
               </li>
               <li>
-                <a href="/home-1#how-it-works" onClick={(e) => handleHashLink(e, 'how-it-works')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
+                <a href="/#how-it-works" onClick={(e) => handleHashLink(e, 'how-it-works')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
                   How It Works
                 </a>
               </li>
@@ -81,12 +69,12 @@ const Footer1 = () => {
                 </Link>
               </li>
               <li>
-                <a href="/home-1#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
+                <a href="/#services" onClick={(e) => handleHashLink(e, 'services')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
                   All Services
                 </a>
               </li>
               <li>
-                <a href="/home-1#faqs" onClick={(e) => handleHashLink(e, 'faqs')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
+                <a href="/#faqs" onClick={(e) => handleHashLink(e, 'faqs')} className="text-slate-400 hover:text-sky-400 text-sm transition-colors cursor-pointer">
                   FAQs
                 </a>
               </li>
