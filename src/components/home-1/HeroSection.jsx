@@ -39,11 +39,11 @@ const HeroSection = () => {
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
 
         {/* Overlapping Image — desktop only */}
-        <div className="hidden lg:block absolute bottom-0 right-[270px] xl:right-[330px] z-10 w-[460px] h-[560px] rounded-3xl overflow-hidden pointer-events-none select-none">
+        <div className="hidden lg:block absolute bottom-0 right-[260px] xl:right-[320px] z-10 w-[400px] h-[580px] pointer-events-none select-none">
           <img
             src="/images/hero.png"
             alt="Student"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-contain object-bottom drop-shadow-2xl"
           />
         </div>
 

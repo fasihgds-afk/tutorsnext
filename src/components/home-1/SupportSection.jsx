@@ -95,7 +95,7 @@ const SupportSection = () => {
             {/* Right: Agent Illustration */}
             <div className="lg:col-span-5 flex justify-center items-center">
               <img
-                src="/images/CTA-3.png"
+                src="/images/CTA-3.jfif"
                 alt="Academic specialist"
                 className="w-full max-w-[400px] h-auto object-contain"
               />
