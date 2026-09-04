@@ -9,6 +9,7 @@ import Login from '../features/auth/pages/Login';
 import PlaceOrder from '../features/orders/pages/PlaceOrder';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
 import Reviews from '../features/reviews/pages/Reviews';
+import { SITE_CONFIG } from '../config/siteConfig';
 import { HOME_1_SEO_ROUTES, checkIsActiveHome1, checkIsHome1Path } from '../config/homeConfig';
 
 // Dynamic SEO route component rendering Home or Home-1 according to configuration
@@ -35,9 +36,12 @@ const AppRoutes = () => {
         ))}
 
         <Route path="/reviews" element={<Reviews />} />
+        {/* Registration is reachable at both '/account/register' and the
+            centralized SITE_CONFIG.routes.register path so links generated
+            from siteConfig.js always resolve to a real route. */}
         <Route path="/account/register" element={<Register />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={SITE_CONFIG.routes.register} element={<Register />} />
+        <Route path={SITE_CONFIG.routes.login} element={<Login />} />
       </Route>
 
       {/* Student Routes with Student Navbar & 2-line Footer */}

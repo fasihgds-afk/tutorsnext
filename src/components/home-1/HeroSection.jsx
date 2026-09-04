@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Icon from '../common/Icon';
 import DiscountBadge from '../common/DiscountBadge';
 import { hero } from '../../config/sectionIcons';
+import api from '../../services/api/apiClient';
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({
@@ -12,19 +13,31 @@ const HeroSection = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+    try {
+      await api.post('/contact', {
+        tag: 'tutorsnext',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      });
       setSubmitted(true);
-    }, 2500);
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const perks = [
@@ -247,6 +260,13 @@ const HeroSection = () => {
                       />
                     </div>
                   </div>
+
+                  {/* Error message */}
+                  {error && (
+                    <div className="text-red-500 text-[12px] font-medium text-center px-2 py-1.5 bg-red-50 rounded-lg border border-red-100">
+                      {error}
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button

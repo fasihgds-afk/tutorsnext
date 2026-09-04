@@ -26,7 +26,7 @@ export const SEO_ROUTES_CONFIG = {
   // Global default for routes configured as 'auto' or unspecified
   defaultVariant: 'auto',
 
-  // Per-route mapping:
+  // Per-route mapping
   routes: {
     '/essay-1': 'auto',
     '/paper-1': 'auto',
@@ -34,6 +34,15 @@ export const SEO_ROUTES_CONFIG = {
     '/researchpaper-1': 'auto',
     '/assignment-1': 'auto',
     '/homework-1': 'auto',
+    '/homework-2': 'auto',
+    '/homework-3': 'auto',
+    '/homework-4': 'auto',
+    '/homework-5': 'auto',
+    '/homework-6': 'auto',
+    '/homework-7': 'auto',
+    '/homework-8': 'auto',
+    '/homework-9': 'auto',
+    '/homework-10': 'auto',
     '/thesis-1': 'auto',
     '/dissertation-1': 'auto',
   },
@@ -44,6 +53,18 @@ export const HOME_1_SEO_ROUTES = Object.keys(SEO_ROUTES_CONFIG.routes);
 
 export const HOME_1_PATH = '/home-1';
 export const HOME_DEFAULT_PATH = '/';
+
+/**
+ * Normalizes a raw pathname: strips query/hash, lowercases,
+ * and removes a trailing slash (except for the root '/').
+ */
+const normalizePath = (pathname = '') => {
+  let clean = String(pathname).split('?')[0].split('#')[0].toLowerCase();
+  if (clean.length > 1 && clean.endsWith('/')) {
+    clean = clean.slice(0, -1);
+  }
+  return clean || '/';
+};
 
 /**
  * Check if the site configuration sets Home-1 as the active homepage for '/'.
@@ -57,11 +78,12 @@ export const checkIsActiveHome1 = (activeHomeSetting = SITE_CONFIG.activeHome) =
  * Resolves the variant ('home' | 'home1') for a given pathname.
  */
 export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.activeHome) => {
-  const cleanPath = String(pathname).split('?')[0].split('#')[0].toLowerCase();
+  const cleanPath = normalizePath(pathname);
   const activeIsHome1 = checkIsActiveHome1(activeHomeSetting);
 
   // 1. Explicit Home-1 paths & aliases
-  if (cleanPath.startsWith('/home-1') || cleanPath.startsWith('/home1')) {
+  if (cleanPath === '/home-1' || cleanPath.startsWith('/home-1/') ||
+      cleanPath === '/home1' || cleanPath.startsWith('/home1/')) {
     return 'home1';
   }
 
@@ -70,10 +92,9 @@ export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.a
     return 'home';
   }
 
-  // 3. Configured SEO Routes
-  const configuredVariant = SEO_ROUTES_CONFIG.routes[cleanPath] || (
-    HOME_1_SEO_ROUTES.includes(cleanPath) ? SEO_ROUTES_CONFIG.defaultVariant : null
-  );
+  // 3. Configured SEO Routes (explicit lookup only — no need to re-check
+  //    HOME_1_SEO_ROUTES, since it's just Object.keys(SEO_ROUTES_CONFIG.routes))
+  const configuredVariant = SEO_ROUTES_CONFIG.routes[cleanPath];
 
   if (configuredVariant) {
     const val = String(configuredVariant).trim().toLowerCase();
@@ -94,17 +115,17 @@ export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.a
   }
 
   // 5. Shared public pages (reviews, etc.) inherit Home-1 when activeHome is Home-1,
-  // except for explicit auth, account, or student routes
-  if (
-    activeIsHome1 &&
-    !cleanPath.startsWith('/home') &&
-    !cleanPath.startsWith('/login') &&
-    !cleanPath.startsWith('/register') &&
-    !cleanPath.startsWith('/account') &&
-    !cleanPath.startsWith('/student') &&
-    !cleanPath.startsWith('/order') &&
-    !cleanPath.startsWith('/user-area')
-  ) {
+  //    except for explicit auth, account, or student routes.
+  //    NOTE: '/home', '/home-1', '/home1' are already returned above in steps 1-2,
+  //    so we only need to exclude the *other* reserved sections here — using an
+  //    exact-prefix-with-boundary check so routes like '/homework-11' or
+  //    '/home-services' (not otherwise configured) aren't accidentally excluded.
+  const reservedPrefixes = ['/login', '/register', '/account', '/student', '/order', '/user-area'];
+  const isReserved = reservedPrefixes.some(
+    (prefix) => cleanPath === prefix || cleanPath.startsWith(`${prefix}/`)
+  );
+
+  if (activeIsHome1 && !isReserved) {
     return 'home1';
   }
 
@@ -122,12 +143,12 @@ export const checkIsHome1Path = (pathname = '', activeHomeSetting = SITE_CONFIG.
  * Check if the current pathname is a landing page with section IDs.
  */
 export const checkIsLandingPath = (pathname = '') => {
-  const cleanPath = String(pathname).split('?')[0].split('#')[0].toLowerCase();
+  const cleanPath = normalizePath(pathname);
   return (
     cleanPath === '/' ||
     cleanPath === '/home' ||
-    cleanPath.startsWith('/home-1') ||
-    cleanPath.startsWith('/home1') ||
+    cleanPath === '/home-1' || cleanPath.startsWith('/home-1/') ||
+    cleanPath === '/home1' || cleanPath.startsWith('/home1/') ||
     Boolean(SEO_ROUTES_CONFIG.routes[cleanPath])
   );
 };
