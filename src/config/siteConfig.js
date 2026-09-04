@@ -26,12 +26,12 @@ export const SITE_CONFIG = {
     href: 'tel:+14068205727',
   },
   phoneHome1: {
-    display: '+1 (406) 820-5727',
-    href: 'tel:+14068205727',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
   whatsapp: {
-    display: '+1 (406) 820-5727',
-    href: 'tel:+14068205727',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
   email: {
     display: 'care@tutorsnext.com',
