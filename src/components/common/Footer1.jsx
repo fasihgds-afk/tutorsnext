@@ -103,12 +103,12 @@ const Footer1 = () => {
                   24/7 Live Support Team
                 </span>
               </li>
-              <li>
+              {/* <li>
                 <span className="flex items-start gap-2.5 text-slate-400 text-xs sm:text-sm">
                   <Icon icon={footer.location} className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                   <span>Office # 1, Choudhary Plaza, Third Floor, Plot 6/7 N, Main Block, Swan Garden , Islamabad , Islamabad Rural , Islamabad Capital Territory</span>
                 </span>
-              </li>
+              </li> */}
             </ul>
           </div>
 
