@@ -38,19 +38,18 @@ const HeroSection = () => {
     <section className="w-full bg-surface-alt py-4 lg:py-8 px-4 sm:px-10 lg:px-16 xl:px-20 relative overflow-hidden">
       <div className="w-full max-w-7xl mx-auto relative px-0 sm:px-4">
 
-        {/* Overlapping Image — desktop only */}
-        <div className="hidden lg:block absolute bottom-0 right-[270px] xl:right-[330px] z-10 w-[460px] h-[560px] rounded-3xl overflow-hidden pointer-events-none select-none">
+        {/* Cutout image between copy and form — TutorsPath overlap */}
+        <div className="hidden lg:block absolute bottom-0 right-65 xl:right-80 z-10 w-100 h-145 pointer-events-none select-none">
           <img
             src="/images/hero.png"
             alt="Student"
-            className="w-full h-full object-cover object-top"
+            className="hero-edge-blend w-full h-full object-contain object-bottom"
           />
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-20">
 
-          {/* LEFT CONTENT COLUMN */}
+          {/* LEFT CONTENT */}
           <div className="lg:col-span-7 flex flex-col space-y-5 lg:space-y-6 max-w-sm mx-auto lg:max-w-xl lg:mx-0 w-full text-center lg:text-left">
 
             {/* Trust Badge */}
@@ -64,7 +63,7 @@ const HeroSection = () => {
               Get Better Grades with{' '}
               <br />
               Expert{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-start to-brand-end">
                 Academic Writing Services
               </span>
             </h1>
@@ -79,7 +78,7 @@ const HeroSection = () => {
             </div>
 
             {/* 2x2 Feature Grid */}
-            <div className="grid grid-cols-2 gap-x-3 gap-y-4 pt-1 w-full lg:max-w-[410px]">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-4 pt-1 w-full lg:max-w-102.5">
               {perks.map((f) => (
                 <div key={f.title} className="group flex items-start gap-3">
                   <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-soft flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface group-hover:scale-110 transition-all duration-300">
@@ -94,7 +93,7 @@ const HeroSection = () => {
             </div>
 
             {/* Rating Box */}
-            <div className="bg-surface rounded-2xl p-3.5 shadow-md border border-card-border flex items-center justify-between gap-3 mt-1 w-full lg:max-w-[430px] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+            <div className="bg-surface rounded-2xl p-3.5 shadow-md border border-card-border flex items-center justify-between gap-3 mt-1 w-full lg:max-w-107.5 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
                   <span className="text-[17px] font-extrabold text-text-dark">4.8/5</span>
@@ -135,10 +134,10 @@ const HeroSection = () => {
           <div className="lg:col-span-5 relative w-full flex justify-center lg:justify-end pt-4 lg:pt-0 lg:pr-3">
 
             {/* Form Card */}
-            <div className="bg-surface rounded-[20px] lg:rounded-[24px] shadow-[0_8px_32px_rgba(2,132,199,0.13)] border border-card-border w-full max-w-[420px] lg:max-w-[330px] overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(2,132,199,0.18)] transition-shadow duration-300">
+            <div className="bg-surface rounded-[20px] lg:rounded-3xl shadow-[0_8px_32px_rgba(2,132,199,0.13)] border border-card-border w-full max-w-105 lg:max-w-82.5 overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(2,132,199,0.18)] transition-shadow duration-300">
 
               {/* Banner Header */}
-              <div className="absolute -top-5 left-4 right-4 z-30 bg-gradient-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">
+              <div className="absolute -top-5 left-4 right-4 z-30 bg-linear-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">
                 Get in Touch — We are Available 24/7
               </div>
 
@@ -164,7 +163,7 @@ const HeroSection = () => {
                       <Icon icon={hero.success} className="w-7 h-7 text-primary" />
                     </div>
                     <h3 className="text-[17px] font-bold text-text-dark">Thank You!</h3>
-                    <p className="text-[13px] text-text-body opacity-70 max-w-[220px]">
+                    <p className="text-[13px] text-text-body opacity-70 max-w-55">
                       Your message has been received. We'll get back to you within 10 minutes.
                     </p>
                   </div>

@@ -397,3 +397,17 @@
     animation: none;
   }
 }
+
+/* Soft-fade only the photo edges into the page — subject stays sharp */
+.hero-edge-blend {
+  filter: drop-shadow(0 14px 24px rgba(15, 23, 42, 0.12));
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 8%, #000 78%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 8%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
