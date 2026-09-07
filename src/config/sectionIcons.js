@@ -210,6 +210,7 @@ export const studentNav = {
   logout: LogOut,
   menu: Menu,
   close: X,
+  createOrder: FilePenLine,
 };
 
 export const footer = {

@@ -110,8 +110,13 @@ const HeroSection = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
                   <span className="text-[17px] font-extrabold text-text-dark">4.8/5</span>
-                  <div className="flex text-amber-400 text-[13px] gap-0.5">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  <div className="flex text-amber-400 text-[13px] gap-0.5 items-center">
+                    <span>★</span><span>★</span><span>★</span><span>★</span>
+                    {/* Half star for 4.8 */}
+                    <span className="relative inline-block">
+                      <span className="text-gray-300">★</span>
+                      <span className="absolute inset-0 overflow-hidden w-[60%]">★</span>
+                    </span>
                   </div>
                 </div>
                 <span className="text-[10px] text-text-body font-medium opacity-65">Based on 2,000+ Reviews</span>

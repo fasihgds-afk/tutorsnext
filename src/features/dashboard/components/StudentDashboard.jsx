@@ -110,90 +110,94 @@ const StudentDashboard = () => {
               </div>
             </div>
 
-            {/* ── Desktop Table (hidden on mobile) ── */}
-            <div className="hidden sm:block w-full border border-slate-200 rounded-sm overflow-x-auto bg-white shadow-xs">
-              <table className="w-full min-w-[640px] text-center text-xs border-collapse">
-                <thead>
-                  <tr className="bg-primary text-white font-semibold">
-                    <th className="py-3 px-3 font-semibold text-center border-r border-emerald-600/30 whitespace-nowrap">Order ID</th>
-                    <th className="py-3 px-3 font-semibold text-center border-r border-emerald-600/30">Project</th>
-                    <th className="py-3 px-3 font-semibold text-center border-r border-emerald-600/30 whitespace-nowrap">Order Date</th>
-                    <th className="py-3 px-3 font-semibold text-center border-r border-emerald-600/30 whitespace-nowrap">Delivery</th>
-                    <th className="py-3 px-3 font-semibold text-center border-r border-emerald-600/30">Status</th>
-                    <th className="py-3 px-3 font-semibold text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {isLoading ? (
-                    <tr className="bg-slate-50 border-t border-slate-200">
-                      <td colSpan="6" className="py-8 text-center text-slate-500 font-medium">
-                        Loading your orders...
-                      </td>
-                    </tr>
-                  ) : displayedOrders.length === 0 ? (
-                    <tr className="bg-slate-50 border-t border-slate-200">
-                      <td colSpan="6" className="py-8 text-center text-slate-500 font-medium">
-                        No Record Found
-                      </td>
-                    </tr>
-                  ) : (
-                    displayedOrders.map((order, idx) => {
-                      const displayId = order.orderNumber || (order._id ? `#${order._id.slice(-6).toUpperCase()}` : `#ORD-${idx + 1}`);
-                      const projectTitle = order.title || order.assignmentType || 'Academic Paper';
-                      const orderDate = order.createdAt
-                        ? new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-                        : 'Today';
-                      const deliveryDate = order.deadline || '3-5 Days';
-                      const { label: statusLabel, cls: statusCls } = getStatusConfig(order.status, order.paymentStatus);
-                      const { label: actionLabel, cls: actionCls } = getActionConfig(order);
+            {/* ── Orders Table — Desktop scrollable, Mobile card-stack ── */}
 
-                      return (
-                        <tr key={order._id || idx} className="border-t border-slate-200 hover:bg-slate-50 transition-colors text-slate-700 font-medium">
-                          <td className="py-3.5 px-3 font-bold text-primary border-r border-slate-200 whitespace-nowrap text-left">
-                            {displayId}
-                          </td>
-                          <td className="py-3.5 px-3 text-slate-900 border-r border-slate-200 font-semibold text-left" style={{maxWidth: '160px'}}>
-                            <div className="truncate">{projectTitle}</div>
-                            {order.academicLevel && (
-                              <span className="text-[11px] text-slate-500 font-normal">
-                                {order.academicLevel} &bull; {order.numberOfPages || 1} pg
-                              </span>
-                            )}
-                          </td>
-                          <td className="py-3.5 px-3 text-slate-600 border-r border-slate-200 whitespace-nowrap">{orderDate}</td>
-                          <td className="py-3.5 px-3 text-slate-700 border-r border-slate-200 font-medium whitespace-nowrap">{deliveryDate}</td>
-                          <td className="py-3.5 px-3 border-r border-slate-200">
-                            <span className={`text-xs font-semibold px-2 py-1 rounded whitespace-nowrap ${statusCls}`}>{statusLabel}</span>
-                          </td>
-                          <td className="py-3.5 px-3">
-                            <Link
-                              to={`/Order/ConfirmOrderDetails?orderId=${order._id || order.id || order.orderNumber}`}
-                              className={`text-[11px] font-bold px-3 py-1.5 rounded transition-colors inline-block whitespace-nowrap ${actionCls}`}
-                            >
-                              {actionLabel}
-                            </Link>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  )}
-                </tbody>
-              </table>
+            {/* Desktop Table (md and above = 768px+) */}
+            <div className="hidden md:block w-full border border-slate-200 rounded-lg overflow-hidden bg-white shadow-xs">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[580px] text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-primary text-white font-semibold">
+                      <th className="py-3 px-3 font-semibold text-left border-r border-white/20 whitespace-nowrap">Order ID</th>
+                      <th className="py-3 px-3 font-semibold text-left border-r border-white/20">Project</th>
+                      <th className="py-3 px-3 font-semibold text-center border-r border-white/20 whitespace-nowrap">Order Date</th>
+                      <th className="py-3 px-3 font-semibold text-center border-r border-white/20 whitespace-nowrap">Delivery</th>
+                      <th className="py-3 px-3 font-semibold text-center border-r border-white/20">Status</th>
+                      <th className="py-3 px-3 font-semibold text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {isLoading ? (
+                      <tr className="bg-slate-50">
+                        <td colSpan="6" className="py-10 text-center text-slate-400 font-medium">
+                          Loading your orders…
+                        </td>
+                      </tr>
+                    ) : displayedOrders.length === 0 ? (
+                      <tr className="bg-slate-50">
+                        <td colSpan="6" className="py-10 text-center text-slate-400 font-medium">
+                          No Record Found
+                        </td>
+                      </tr>
+                    ) : (
+                      displayedOrders.map((order, idx) => {
+                        const displayId = order.orderNumber || (order._id ? `TN-${order._id.slice(-8).toUpperCase()}` : `#ORD-${idx + 1}`);
+                        const projectTitle = order.title || order.assignmentType || 'Academic Paper';
+                        const orderDate = order.createdAt
+                          ? new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+                          : 'Today';
+                        const deliveryDate = order.deadline || '3-5 Days';
+                        const { label: statusLabel, cls: statusCls } = getStatusConfig(order.status, order.paymentStatus);
+                        const { label: actionLabel, cls: actionCls } = getActionConfig(order);
+
+                        return (
+                          <tr key={order._id || idx} className="border-t border-slate-100 hover:bg-slate-50 transition-colors">
+                            <td className="py-3 px-3 font-bold text-primary whitespace-nowrap text-left">
+                              {displayId}
+                            </td>
+                            <td className="py-3 px-3 text-slate-900 font-semibold text-left max-w-[180px]">
+                              <div className="truncate">{projectTitle}</div>
+                              {order.academicLevel && (
+                                <span className="text-[11px] text-slate-400 font-normal block">
+                                  {order.academicLevel} &bull; {order.numberOfPages || 1} pg
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3 px-3 text-slate-500 text-center whitespace-nowrap">{orderDate}</td>
+                            <td className="py-3 px-3 text-slate-600 font-medium text-center whitespace-nowrap">{deliveryDate}</td>
+                            <td className="py-3 px-3 text-center">
+                              <span className={`text-[11px] font-semibold px-2 py-1 rounded whitespace-nowrap ${statusCls}`}>{statusLabel}</span>
+                            </td>
+                            <td className="py-3 px-3 text-center">
+                              <Link
+                                to={`/Order/ConfirmOrderDetails?orderId=${order._id || order.id || order.orderNumber}`}
+                                className={`text-[11px] font-bold px-3 py-1.5 rounded transition-colors inline-block whitespace-nowrap ${actionCls}`}
+                              >
+                                {actionLabel}
+                              </Link>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            {/* ── Mobile Cards (visible only on mobile) ── */}
-            <div className="sm:hidden flex flex-col gap-3">
+            {/* ── Mobile Cards (below md = 768px) ── */}
+            <div className="md:hidden flex flex-col gap-3">
               {isLoading ? (
-                <div className="py-8 text-center text-slate-500 font-medium text-sm">
-                  Loading your orders...
+                <div className="py-10 text-center text-slate-400 font-medium text-sm bg-white border border-slate-200 rounded-xl">
+                  Loading your orders…
                 </div>
               ) : displayedOrders.length === 0 ? (
-                <div className="py-8 text-center text-slate-500 font-medium text-sm border border-slate-200 rounded-lg bg-white">
+                <div className="py-10 text-center text-slate-400 font-medium text-sm border border-slate-200 rounded-xl bg-white">
                   No Record Found
                 </div>
               ) : (
                 displayedOrders.map((order, idx) => {
-                  const displayId = order.orderNumber || (order._id ? `#${order._id.slice(-6).toUpperCase()}` : `#ORD-${idx + 1}`);
+                  const displayId = order.orderNumber || (order._id ? `TN-${order._id.slice(-8).toUpperCase()}` : `#ORD-${idx + 1}`);
                   const projectTitle = order.title || order.assignmentType || 'Academic Paper';
                   const orderDate = order.createdAt
                     ? new Date(order.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -203,42 +207,47 @@ const StudentDashboard = () => {
                   const { label: actionLabel, cls: actionCls } = getActionConfig(order);
 
                   return (
-                    <div key={order._id || idx} className="bg-white border border-slate-200 rounded-lg p-4 flex flex-col gap-3 shadow-xs">
-                      {/* ID + status */}
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs font-bold text-primary break-all leading-snug">{displayId}</span>
-                        <span className={`text-xs font-semibold px-2 py-0.5 rounded shrink-0 ${statusCls}`}>{statusLabel}</span>
+                    <div key={order._id || idx} className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                      {/* Card header */}
+                      <div className="bg-primary px-4 py-2.5 flex items-center justify-between gap-2">
+                        <span className="text-xs font-extrabold text-white tracking-wide">{displayId}</span>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-white/20 text-white">{statusLabel}</span>
                       </div>
 
-                      {/* Project */}
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900 leading-snug">{projectTitle}</p>
-                        {order.academicLevel && (
-                          <p className="text-xs text-slate-500 mt-0.5">
-                            {order.academicLevel} &bull; {order.numberOfPages || 1} page{order.numberOfPages > 1 ? 's' : ''}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Dates */}
-                      <div className="flex gap-5 text-xs">
+                      <div className="px-4 pt-3 pb-4 flex flex-col gap-3">
+                        {/* Project title */}
                         <div>
-                          <p className="text-slate-400 font-medium">Ordered</p>
-                          <p className="font-semibold text-slate-700 mt-0.5">{orderDate}</p>
+                          <p className="text-sm font-bold text-slate-800 leading-snug">{projectTitle}</p>
+                          {order.academicLevel && (
+                            <p className="text-xs text-slate-400 mt-0.5">
+                              {order.academicLevel} &bull; {order.numberOfPages || 1} page{order.numberOfPages > 1 ? 's' : ''}
+                            </p>
+                          )}
                         </div>
-                        <div>
-                          <p className="text-slate-400 font-medium">Delivery</p>
-                          <p className="font-semibold text-slate-700 mt-0.5">{deliveryDate}</p>
-                        </div>
-                      </div>
 
-                      {/* Action */}
-                      <Link
-                        to={`/Order/ConfirmOrderDetails?orderId=${order._id || order.id || order.orderNumber}`}
-                        className={`w-full text-center text-xs font-bold py-2.5 px-4 rounded transition-colors ${actionCls}`}
-                      >
-                        {actionLabel}
-                      </Link>
+                        {/* Status badge */}
+                        <span className={`self-start text-xs font-semibold px-3 py-1 rounded-full ${statusCls}`}>{statusLabel}</span>
+
+                        {/* Meta row */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="bg-slate-50 border border-slate-100 rounded-lg px-3 py-2">
+                            <p className="text-slate-400 font-medium mb-0.5">Order Date</p>
+                            <p className="font-bold text-slate-700">{orderDate}</p>
+                          </div>
+                          <div className="bg-slate-50 border border-slate-100 rounded-lg px-3 py-2">
+                            <p className="text-slate-400 font-medium mb-0.5">Delivery</p>
+                            <p className="font-bold text-slate-700">{deliveryDate}</p>
+                          </div>
+                        </div>
+
+                        {/* Action button */}
+                        <Link
+                          to={`/Order/ConfirmOrderDetails?orderId=${order._id || order.id || order.orderNumber}`}
+                          className={`w-full text-center text-sm font-bold py-3 px-4 rounded-lg transition-colors ${actionCls}`}
+                        >
+                          {actionLabel}
+                        </Link>
+                      </div>
                     </div>
                   );
                 })

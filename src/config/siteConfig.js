@@ -38,6 +38,7 @@ export const SITE_CONFIG = {
     href: 'mailto:care@tutorsnext.com',
   },
   // Change activeHome to 'home' or 'home-1' to choose which home shows on '/'
+  activeHome: 'home-1',
   // Website tag for backend multi-tenant identification
   tag: import.meta.env.VITE_SITE_TAG || 'tutorsnext',
   routes: {
