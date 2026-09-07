@@ -28,7 +28,7 @@ export const SEO_ROUTES_CONFIG = {
 
   // Per-route mapping
   routes: {
-    '/essay-1': 'auto',
+    '/essay-1': 'home',
     '/paper-1': 'auto',
     '/termpaper-1': 'auto',
     '/researchpaper-1': 'auto',
