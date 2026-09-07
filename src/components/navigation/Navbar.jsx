@@ -75,17 +75,42 @@ const Navbar = () => {
               <span>{currentPhone.display}</span>
             </a>
 
-            {/* Hire A Writer / Tutor — scrolls to hero form */}
-            <a
-              href="/#hero"
-              onClick={(e) => handleHashLink(e, 'hero')}
-              className="btn-fill-hover flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full shadow-sm whitespace-nowrap"
-            >
-              <span className="inline-flex items-center gap-1.5">
-                <Icon icon={nav.plus} className="w-3.5 h-3.5 shrink-0" strokeWidth={2.5} />
-                <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
-              </span>
-            </a>
+            {isHome1 ? (
+              /* Home-1: Hire A Tutor — scrolls to hero form */
+              <a
+                href="/#hero"
+                onClick={(e) => handleHashLink(e, 'hero')}
+                className="btn-fill-hover flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full shadow-sm whitespace-nowrap"
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon icon={nav.plus} className="w-3.5 h-3.5 shrink-0" strokeWidth={2.5} />
+                  <span>Hire A Tutor</span>
+                </span>
+              </a>
+            ) : (
+              /* Home: Hire A Writer (links to register) + Login */
+              <>
+                <Link
+                  to={SITE_CONFIG.routes.register}
+                  className="btn-fill-hover flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full shadow-sm whitespace-nowrap"
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    <Icon icon={nav.plus} className="w-3.5 h-3.5 shrink-0" strokeWidth={2.5} />
+                    <span>Hire A Writer</span>
+                  </span>
+                </Link>
+
+                <Link
+                  to={SITE_CONFIG.routes.login}
+                  className="btn-fill-hover-outline flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <span>Login</span>
+                    <Icon icon={nav.user} className="w-4 h-4 shrink-0" />
+                  </span>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -152,17 +177,44 @@ const Navbar = () => {
                 <Icon icon={nav.phone} className="w-5 h-5" />
                 <span>{currentPhone.display}</span>
               </a>
-              {/* Hire A Writer / Tutor — scrolls to hero form */}
-              <a
-                href="/#hero"
-                onClick={(e) => { onNavHashClick(e, 'hero'); }}
-                className="btn-fill-hover flex items-center justify-center gap-2 font-semibold px-5 py-2.5 rounded-full"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Icon icon={nav.plus} className="w-4 h-4" />
-                  <span>{isHome1 ? 'Hire A Tutor' : 'Hire A Writer'}</span>
-                </span>
-              </a>
+              {isHome1 ? (
+                /* Home-1: Hire A Tutor — scrolls to hero form */
+                <a
+                  href="/#hero"
+                  onClick={(e) => { onNavHashClick(e, 'hero'); }}
+                  className="btn-fill-hover flex items-center justify-center gap-2 font-semibold px-5 py-2.5 rounded-full"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Icon icon={nav.plus} className="w-4 h-4" />
+                    <span>Hire A Tutor</span>
+                  </span>
+                </a>
+              ) : (
+                /* Home: Hire A Writer (links to register) + Login */
+                <>
+                  <Link
+                    to={SITE_CONFIG.routes.register}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="btn-fill-hover flex items-center justify-center gap-2 font-semibold px-5 py-2.5 rounded-full"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Icon icon={nav.plus} className="w-4 h-4" />
+                      <span>Hire A Writer</span>
+                    </span>
+                  </Link>
+
+                  <Link
+                    to={SITE_CONFIG.routes.login}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="btn-fill-hover-outline flex items-center justify-center rounded-full px-5 py-2 font-semibold"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <span>Login</span>
+                      <Icon icon={nav.user} className="w-5 h-5" />
+                    </span>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
