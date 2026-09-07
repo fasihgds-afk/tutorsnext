@@ -4,6 +4,7 @@ import LoginForm from '../components/LoginForm';
 import ActiveSessionCard from '../components/ActiveSessionCard';
 import tokenManager from '../../../services/auth/tokenManager';
 import authApi from '../api/authApi';
+import { orderApi } from '../../orders/api/orderApi';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,16 @@ const Login = () => {
     // Calls backend login API: POST /api/v1/auth/login
     const response = await authApi.login(data);
     console.log('Login successful:', response);
-    navigate('/student/dashboard');
+    try {
+      const orders = await orderApi.getStudentOrders();
+      if (!orders || orders.length === 0) {
+        navigate('/Order/PlaceOrder');
+      } else {
+        navigate('/student/dashboard');
+      }
+    } catch {
+      navigate('/Order/PlaceOrder');
+    }
   };
 
   return (

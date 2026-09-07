@@ -8,6 +8,7 @@ import tokenManager from '../../../services/auth/tokenManager';
 import Icon from '../../../components/common/Icon.jsx';
 import { auth } from '../../../config/sectionIcons.js';
 import authApi from '../api/authApi';
+import { orderApi } from '../../orders/api/orderApi';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,8 +22,17 @@ const Register = () => {
     // Calls backend signup API: POST /api/v1/auth/signup
     const response = await authApi.signup(payload);
     console.log('Registration successful:', response);
-    setTimeout(() => {
-      navigate('/student/dashboard');
+    setTimeout(async () => {
+      try {
+        const orders = await orderApi.getStudentOrders();
+        if (!orders || orders.length === 0) {
+          navigate('/Order/PlaceOrder');
+        } else {
+          navigate('/student/dashboard');
+        }
+      } catch {
+        navigate('/Order/PlaceOrder');
+      }
     }, 1200);
   };
 

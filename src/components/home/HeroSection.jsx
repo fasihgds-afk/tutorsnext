@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import tokenManager from '../../services/auth/tokenManager';
 import { FileText, GraduationCap, BookOpen, Clock } from 'lucide-react';
 import Icon from '../common/Icon';
 import DiscountBadge from '../common/DiscountBadge';
@@ -40,8 +41,14 @@ const HeroSection = () => {
       wordCount: '275 Words',
       savedAt: Date.now(),
     };
+    // Persist selections regardless of auth state so they survive registration
     localStorage.setItem('heroOrderData', JSON.stringify(heroOrderData));
-    navigate('/Order/PlaceOrder');
+
+    if (tokenManager.isAuthenticated()) {
+      navigate('/Order/PlaceOrder');
+    } else {
+      navigate('/account/register');
+    }
   };
 
   return (
