@@ -1,13 +1,18 @@
 import api from '../../../services/api/apiClient';
 import tokenManager from '../../../services/auth/tokenManager';
+import { SITE_CONFIG } from '../../../config/siteConfig';
 
 export const authApi = {
   /**
    * Register a new user (Student)
-   * @param {{ fullName: string, email: string, countryCode: string, phoneNumber: string, password: string }} payload
+   * @param {{ fullName: string, email: string, countryCode: string, phoneNumber: string, password: string, tag?: string }} payload
    */
   signup: async (payload) => {
-    const res = await api.post('/auth/signup', payload);
+    const body = {
+      tag: SITE_CONFIG.tag || 'tutorsnext',
+      ...payload,
+    };
+    const res = await api.post('/auth/signup', body);
     if (res?.data?.token) {
       tokenManager.setAuth(res.data.token, res.data.user);
     }

@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import RegisterPerks from '../components/RegisterPerks';
 import RegisterTrustBadge from '../components/RegisterTrustBadge';
+import ActiveSessionCard from '../components/ActiveSessionCard';
+import tokenManager from '../../../services/auth/tokenManager';
 import Icon from '../../../components/common/Icon.jsx';
 import { auth } from '../../../config/sectionIcons.js';
+import authApi from '../api/authApi';
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(tokenManager.isAuthenticated());
+
+  useEffect(() => {
+    setIsLoggedIn(tokenManager.isAuthenticated());
+  }, []);
+
   const handleRegister = async (payload) => {
     // Calls backend signup API: POST /api/v1/auth/signup
     const response = await authApi.signup(payload);
     console.log('Registration successful:', response);
-    // No redirect — errors are surfaced by RegisterForm
+    setTimeout(() => {
+      navigate('/student/dashboard');
+    }, 1200);
   };
 
   return (
@@ -60,9 +73,16 @@ const Register = () => {
             </div>
           </div>
 
-          {/* ── Right Column: Register Form (Matches Login Form design) ──────── */}
+          {/* ── Right Column: Register Form or Active Session Card ──────── */}
           <div className="lg:col-span-5 order-1 lg:order-2 w-full max-w-md mx-auto lg:max-w-none">
-            <RegisterForm onSubmit={handleRegister} />
+            {isLoggedIn ? (
+              <ActiveSessionCard
+                pageTitle="Register Account"
+                onLogout={() => setIsLoggedIn(false)}
+              />
+            ) : (
+              <RegisterForm onSubmit={handleRegister} />
+            )}
           </div>
 
         </div>

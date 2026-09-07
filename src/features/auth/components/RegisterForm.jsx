@@ -70,9 +70,10 @@ const validate = ({ fullName, email, phone, password }) => {
 const EMPTY_FIELDS = { fullName: '', email: '', countryCode: '+1', phone: '', password: '' };
 
 // ─── Main component ───────────────────────────────────────────────────────────
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }) => {
   const [fields, setFields]             = useState(EMPTY_FIELDS);
   const [errors, setErrors]             = useState({});
+  const [apiError, setApiError]         = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading]       = useState(false);
   const [isSuccess, setIsSuccess]       = useState(false);
@@ -80,6 +81,7 @@ const RegisterForm = () => {
   const set = (key) => (e) => {
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }));
+    if (apiError) setApiError('');
   };
 
   const borderClass = (key) => {
@@ -88,24 +90,38 @@ const RegisterForm = () => {
     return 'border-slate-200 focus:border-sky-500';
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError('');
     const clientErrors = validate(fields);
     setErrors(clientErrors);
     if (Object.keys(clientErrors).length > 0) return;
 
     setIsLoading(true);
-    setIsSuccess(false);
-
-    // Simulate brief loading then show success
-    setTimeout(() => {
-      setFields(EMPTY_FIELDS);
-      setIsLoading(false);
+    try {
+      const cleanPhone = fields.phone.trim().replace(/\D/g, '');
+      await onSubmit?.({
+        fullName: fields.fullName.trim(),
+        email: fields.email.trim(),
+        countryCode: fields.countryCode.trim(),
+        phoneNumber: cleanPhone,
+        password: fields.password,
+      });
       setIsSuccess(true);
-
-      // Auto-hide success message after 3.5s
-      setTimeout(() => setIsSuccess(false), 3500);
-    }, 1500);
+    } catch (err) {
+      console.error('Registration error:', err);
+      if (err?.errors && Array.isArray(err.errors)) {
+        const backendFieldErrors = {};
+        err.errors.forEach((eItem) => {
+          const fieldKey = eItem.field === 'phoneNumber' ? 'phone' : eItem.field;
+          backendFieldErrors[fieldKey] = eItem.message;
+        });
+        setErrors((prev) => ({ ...prev, ...backendFieldErrors }));
+      }
+      setApiError(err?.message || 'Registration failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -115,11 +131,20 @@ const RegisterForm = () => {
 
           {/* Success message */}
           {isSuccess && (
-            <div className="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center gap-2.5 text-sky-700 text-sm font-semibold">
-              <Icon icon={auth.form.success} className="w-4 h-4 shrink-0" strokeWidth={2.5} />
-              Your request has been sent successfully!
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-2.5 text-emerald-700 text-sm font-semibold">
+              <Icon icon={auth.form.success} className="w-4 h-4 shrink-0 text-emerald-600" strokeWidth={2.5} />
+              Account created successfully! Redirecting…
             </div>
           )}
+
+          {/* Backend Error Banner */}
+          {apiError && (
+            <div className="p-3 bg-red-50 border border-red-200/80 rounded-xl flex items-start gap-2.5 text-red-700 text-xs">
+              <Icon icon={auth.form.error} className="w-4 h-4 shrink-0 text-red-500 mt-0.5" />
+              <div className="flex-1 font-medium">{apiError}</div>
+            </div>
+          )}
+
           <div className="mb-0.5 text-center">
             <h2 className="text-slate-900 text-xl font-bold tracking-tight">Create Account</h2>
             <p className="text-slate-400 text-xs sm:text-sm mt-0.5">Join thousands of successful students</p>

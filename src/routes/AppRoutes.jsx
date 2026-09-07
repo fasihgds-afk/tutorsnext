@@ -7,6 +7,7 @@ import Home1 from '../features/home/Home1';
 import Register from '../features/auth/pages/Register';
 import Login from '../features/auth/pages/Login';
 import PlaceOrder from '../features/orders/pages/PlaceOrder';
+import ConfirmOrderDetails from '../features/orders/pages/ConfirmOrderDetails';
 import StudentDashboard from '../features/dashboard/components/StudentDashboard';
 import Reviews from '../features/reviews/pages/Reviews';
 import { SITE_CONFIG } from '../config/siteConfig';
@@ -42,6 +43,7 @@ const AppRoutes = () => {
         <Route path="/account/register" element={<Register />} />
         <Route path={SITE_CONFIG.routes.register} element={<Register />} />
         <Route path={SITE_CONFIG.routes.login} element={<Login />} />
+        <Route path="/account/login" element={<Login />} />
       </Route>
 
       {/* Student Routes with Student Navbar & 2-line Footer */}
@@ -59,6 +61,13 @@ const AppRoutes = () => {
         <Route path="/order/PlaceOrder" element={<PlaceOrder />} />
         <Route path="/student/order/place-order" element={<PlaceOrder />} />
         <Route path="/student/order/placeorder" element={<PlaceOrder />} />
+
+        {/* Confirm Order & Deposit Funds Flow */}
+        <Route path="/Order/ConfirmOrderDetails" element={<ConfirmOrderDetails />} />
+        <Route path="/order/confirmorderdetails" element={<ConfirmOrderDetails />} />
+        <Route path="/order/confirm-order-details" element={<ConfirmOrderDetails />} />
+        <Route path="/order/confirm-order" element={<ConfirmOrderDetails />} />
+        <Route path="/student/order/confirm-order-details" element={<ConfirmOrderDetails />} />
       </Route>
 
       {/* Fallback route */}

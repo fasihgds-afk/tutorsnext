@@ -5,14 +5,15 @@ import { useHomeContext } from '../../hooks/useHomeContext';
 import Icon from '../common/Icon.jsx';
 import { studentNav } from '../../config/sectionIcons.js';
 
+import tokenManager from '../../services/auth/tokenManager';
+
 const StudentNavbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { phone } = useHomeContext();
 
   const handleLogout = () => {
-    // Clear tokens/session if needed
-    localStorage.removeItem('authToken');
+    tokenManager.clearAuth();
     navigate('/login');
   };
 
