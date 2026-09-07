@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FileText, GraduationCap, BookOpen, Clock } from 'lucide-react';
 import Icon from '../common/Icon';
 import DiscountBadge from '../common/DiscountBadge';
 import { hero } from '../../config/sectionIcons';
+import {
+  assignmentType,
+  academicLevel,
+  subject,
+  deadline,
+} from '../../config/dropdown-fields.config';
 
 const perks = [
   { Icon: hero.perks[0], title: 'Expert Writers', sub: 'PhD & Master Level' },
@@ -11,27 +19,29 @@ const perks = [
 ];
 
 const HeroSection = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [typeOfWork, setTypeOfWork] = useState('Short Essay');
+  const [academicLvl, setAcademicLvl] = useState('Undergraduate');
+  const [selectedSubject, setSelectedSubject] = useState('History');
+  const [selectedDeadline, setSelectedDeadline] = useState('3 days / Aug 29, 2026 (11:06 PM)');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleProceed = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 2500);
+    const heroOrderData = {
+      assignmentTypeLabel: typeOfWork,
+      typeOfWork,
+      academicLevelLabel: academicLvl,
+      academicLevel: academicLvl,
+      subjectLabel: selectedSubject,
+      subject: selectedSubject,
+      deadlineLabel: selectedDeadline,
+      deadline: selectedDeadline,
+      pages: 1,
+      wordCount: '275 Words',
+      savedAt: Date.now(),
+    };
+    localStorage.setItem('heroOrderData', JSON.stringify(heroOrderData));
+    navigate('/Order/PlaceOrder');
   };
 
   return (
@@ -139,137 +149,152 @@ const HeroSection = () => {
           <div className="lg:col-span-5 relative w-full flex justify-center lg:justify-end pt-4 lg:pt-0 lg:pr-3">
 
             {/* Form Card */}
-            <div className="bg-surface rounded-[20px] lg:rounded-3xl shadow-[0_8px_32px_rgba(2,132,199,0.13)] border border-card-border w-full max-w-105 lg:max-w-82.5 overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(2,132,199,0.18)] transition-shadow duration-300">
+            <div className="bg-surface rounded-[20px] lg:rounded-3xl shadow-[0_8px_32px_rgba(2,132,199,0.13)] border border-card-border w-full max-w-105 lg:max-w-[390px] overflow-visible relative mt-8 hover:shadow-[0_16px_48px_rgba(2,132,199,0.18)] transition-shadow duration-300">
 
               {/* Banner Header */}
               <div className="absolute -top-5 left-4 right-4 z-30 bg-linear-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">
-                Get in Touch — We are Available 24/7
+                Calculate Price &amp; Order
               </div>
 
               <DiscountBadge />
 
               {/* Form Body */}
-              <form onSubmit={handleSubmit} className="pt-10 px-4 lg:px-5 pb-6 space-y-3">
-
-                {/* Loading State */}
-                {loading && (
-                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
-                      <Icon icon={hero.loading} className="w-7 h-7 text-primary animate-spin" />
-                    </div>
-                    <p className="text-[13px] font-semibold text-text-body opacity-70">Sending your message...</p>
+              <form onSubmit={handleProceed} className="pt-10 px-4 lg:px-5 pb-6 space-y-3">
+                {/* Assignment Type */}
+                <div className="group flex items-center gap-3">
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                    <Icon icon={FileText} className="w-4 h-4" />
                   </div>
-                )}
-
-                {/* Thank You Message */}
-                {submitted && (
-                  <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
-                    <div className="w-14 h-14 rounded-full bg-primary-soft flex items-center justify-center">
-                      <Icon icon={hero.success} className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="text-[17px] font-bold text-text-dark">Thank You!</h3>
-                    <p className="text-[13px] text-text-body opacity-70 max-w-55">
-                      Your message has been received. We'll get back to you within 10 minutes.
-                    </p>
-                  </div>
-                )}
-
-                {/* Form Fields — hidden after submit or while loading */}
-                <div className={submitted || loading ? 'hidden' : ''}>
-
-                  {/* Name */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <Icon icon={hero.form.user} className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="John Smith"
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Assignment Type</label>
+                    <div className="relative">
+                      <select
+                        value={typeOfWork}
+                        onChange={(e) => setTypeOfWork(e.target.value)}
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate"
+                      >
+                        {assignmentType.groups.map((g) => (
+                          <optgroup key={g.group} label={g.group}>
+                            {g.options.map((o) => (
+                              <option key={o.value} value={o.label}>
+                                {o.label}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select>
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-text-body opacity-60">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  {/* Email */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <Icon icon={hero.form.email} className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Email Address</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="you@example.com"
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
+                {/* Academic Level */}
+                <div className="group flex items-center gap-3">
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                    <Icon icon={GraduationCap} className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Academic Level</label>
+                    <div className="relative">
+                      <select
+                        value={academicLvl}
+                        onChange={(e) => setAcademicLvl(e.target.value)}
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate"
+                      >
+                        {academicLevel.options.map((o) => (
+                          <option key={o.value} value={o.label}>
+                            {o.label}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-text-body opacity-60">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  {/* Phone */}
-                  <div className="group flex items-center gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
-                      <Icon icon={hero.form.phone} className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Phone Number</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+1 234 567 890"
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40"
-                      />
+                {/* Subject */}
+                <div className="group flex items-center gap-3">
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                    <Icon icon={BookOpen} className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Subject</label>
+                    <div className="relative">
+                      <select
+                        value={selectedSubject}
+                        onChange={(e) => setSelectedSubject(e.target.value)}
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate"
+                      >
+                        {subject.groups.map((g) => (
+                          <optgroup key={g.group} label={g.group}>
+                            {g.options.map((o) => (
+                              <option key={o.value} value={o.label}>
+                                {o.label}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select>
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-text-body opacity-60">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  {/* Message */}
-                  <div className="group flex items-start gap-3">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 mt-0.5">
-                      <Icon icon={hero.form.message} className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="text-[11px] font-bold text-text-body block mb-0.5">Your Message</label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us what you need help with..."
-                        rows={3}
-                        required
-                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 placeholder:text-text-body placeholder:opacity-40 resize-none"
-                      />
+                {/* Deadline */}
+                <div className="group flex items-center gap-3">
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300">
+                    <Icon icon={Clock} className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[11px] font-bold text-text-body block mb-0.5">Deadline</label>
+                    <div className="relative">
+                      <select
+                        value={selectedDeadline}
+                        onChange={(e) => setSelectedDeadline(e.target.value)}
+                        className="w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate"
+                      >
+                        {deadline.options.map((o) => (
+                          <option key={o.value} value={o.label}>
+                            {o.label}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-text-body opacity-60">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="btn-fill-hover w-full mt-1 font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(2,132,199,0.35)] active:scale-[0.98] flex items-center justify-center gap-2 text-[14px] cursor-pointer"
-                  >
-                    <span>Get Free Quote →</span>
-                  </button>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="btn-fill-hover w-full mt-2 font-bold py-3 px-4 rounded-xl shadow-[0_4px_14px_rgba(2,132,199,0.35)] active:scale-[0.98] flex items-center justify-center gap-2 text-[14px] cursor-pointer text-white tracking-wide"
+                >
+                  <span>Continue to Order →</span>
+                </button>
 
-                  {/* Security info */}
-                  <div className="pt-1 flex flex-col items-center gap-1.5 text-center">
-                    <div className="flex items-center gap-1 text-[11px] text-text-body">
-                      <Icon icon={hero.form.lock} className="w-3.5 h-3.5 text-primary shrink-0" />
-                      <span>Your information is safe with us</span>
-                    </div>
+                {/* Security info */}
+                <div className="pt-1 flex flex-col items-center gap-1 text-center">
+                  <div className="flex items-center gap-1 text-[11px] text-text-body">
+                    <Icon icon={hero.form.lock} className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Free Revisions • 100% Confidential • Instant Match</span>
                   </div>
-
-                </div>{/* end hidden wrapper */}
-
+                </div>
               </form>
             </div>
           </div>

@@ -41,28 +41,28 @@ const StudentDashboard = () => {
     const p = String(paymentStatus || '').toLowerCase();
     if (p === 'failed') return { label: 'Payment Failed', cls: 'bg-red-100 text-red-800' };
     switch (s) {
-      case 'draft':              return { label: 'Draft',             cls: 'bg-slate-100 text-slate-700' };
-      case 'awaitingpayment':    return { label: 'Awaiting Payment',  cls: 'bg-amber-100 text-amber-800' };
-      case 'paid':               return { label: 'Paid',              cls: 'bg-emerald-100 text-emerald-800' };
-      case 'writerassigned':     return { label: 'Writer Assigned',   cls: 'bg-blue-100 text-blue-800' };
-      case 'inprogress':         return { label: 'In Progress',       cls: 'bg-indigo-100 text-indigo-800' };
-      case 'submitted':          return { label: 'Submitted',         cls: 'bg-violet-100 text-violet-800' };
-      case 'revisionrequested':  return { label: 'Revision Requested',cls: 'bg-orange-100 text-orange-800' };
-      case 'completed':          return { label: '✓ Completed',       cls: 'bg-emerald-100 text-emerald-900' };
-      case 'cancelled':          return { label: 'Cancelled',         cls: 'bg-red-100 text-red-800' };
-      case 'refunded':           return { label: 'Refunded',          cls: 'bg-slate-100 text-slate-700' };
-      default:                   return { label: status || 'Unknown', cls: 'bg-slate-100 text-slate-700' };
+      case 'draft': return { label: 'Draft', cls: 'bg-slate-100 text-slate-700' };
+      case 'awaitingpayment': return { label: 'Awaiting Payment', cls: 'bg-amber-100 text-amber-800' };
+      case 'paid': return { label: 'Paid', cls: 'bg-emerald-100 text-emerald-800' };
+      case 'writerassigned': return { label: 'Writer Assigned', cls: 'bg-blue-100 text-blue-800' };
+      case 'inprogress': return { label: 'In Progress', cls: 'bg-indigo-100 text-indigo-800' };
+      case 'submitted': return { label: 'Submitted', cls: 'bg-violet-100 text-violet-800' };
+      case 'revisionrequested': return { label: 'Revision Requested', cls: 'bg-orange-100 text-orange-800' };
+      case 'completed': return { label: '✓ Completed', cls: 'bg-emerald-100 text-emerald-900' };
+      case 'cancelled': return { label: 'Cancelled', cls: 'bg-red-100 text-red-800' };
+      case 'refunded': return { label: 'Refunded', cls: 'bg-slate-100 text-slate-700' };
+      default: return { label: status || 'Unknown', cls: 'bg-slate-100 text-slate-700' };
     }
   };
 
   const getActionConfig = (order) => {
     const isPaid = order.paymentStatus === 'paid' ||
-      ['paid','writerAssigned','inProgress','submitted','revisionRequested','completed'].includes(order.status);
+      ['paid', 'writerAssigned', 'inProgress', 'submitted', 'revisionRequested', 'completed'].includes(order.status);
     const isAwaitingPayment = order.status === 'awaitingPayment';
     const isCancelledOrRefunded = ['cancelled', 'refunded'].includes(order.status);
     if (isPaid || isCancelledOrRefunded) return { label: 'View Order', cls: 'bg-slate-600 hover:bg-slate-700 text-white' };
-    if (isAwaitingPayment)               return { label: 'Pay Now',    cls: 'bg-amber-500 hover:bg-amber-600 text-white' };
-    return                                      { label: 'Confirm Order', cls: 'bg-primary hover:bg-primary-hover text-white' };
+    if (isAwaitingPayment) return { label: 'Pay Now', cls: 'bg-amber-500 hover:bg-amber-600 text-white' };
+    return { label: 'Confirm Order', cls: 'bg-primary hover:bg-primary-hover text-white' };
   };
 
   return (
@@ -277,7 +277,7 @@ const StudentDashboard = () => {
                   <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                   </svg>
-                  <span className="font-medium">Chat with a Representative</span>
+                  <span className="font-medium">Chat with our Representative</span>
                 </a>
 
                 <a href={`tel:${SITE_CONFIG.phone?.display?.replace(/\D/g, '') || '19145154875'}`} className="flex items-center gap-3 px-4 py-3 border-b border-slate-100 text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors">

@@ -28,11 +28,28 @@ export const SEO_ROUTES_CONFIG = {
 
   // Per-route mapping
   routes: {
+    // Show Home
     '/essay-1': 'home',
-    '/paper-1': 'auto',
+    '/essay-2': 'home',
+    '/essay-3': 'home',
+    '/essay-4': 'home',
+    '/essay-5': 'home',
+    '/essay-6': 'home',
+
+    '/paper-1': 'home',
+    '/paper-2': 'home',
+    '/paper-3': 'home',
+    '/paper-4': 'home',
+    '/paper-5': 'home',
+    '/paper-6': 'home',
+    '/paper-7': 'home',
+    '/paper-8': 'home',
+
+    // Other routes
     '/termpaper-1': 'auto',
     '/researchpaper-1': 'auto',
     '/assignment-1': 'auto',
+
     '/homework-1': 'auto',
     '/homework-2': 'auto',
     '/homework-3': 'auto',
@@ -43,6 +60,7 @@ export const SEO_ROUTES_CONFIG = {
     '/homework-8': 'auto',
     '/homework-9': 'auto',
     '/homework-10': 'auto',
+
     '/thesis-1': 'auto',
     '/dissertation-1': 'auto',
   },
@@ -83,7 +101,7 @@ export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.a
 
   // 1. Explicit Home-1 paths & aliases
   if (cleanPath === '/home-1' || cleanPath.startsWith('/home-1/') ||
-      cleanPath === '/home1' || cleanPath.startsWith('/home1/')) {
+    cleanPath === '/home1' || cleanPath.startsWith('/home1/')) {
     return 'home1';
   }
 

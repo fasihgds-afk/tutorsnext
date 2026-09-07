@@ -156,7 +156,7 @@ const HeroSection = () => {
 
               {/* Banner Header */}
               <div className="absolute -top-5 left-4 right-4 z-30 bg-linear-to-r from-brand-start to-brand-end py-2.5 lg:py-3 px-4 text-center text-surface font-bold text-[12px] lg:text-[13px] tracking-wide rounded-xl shadow-lg">
-                Get in Touch — We Reply in 10 Minutes
+                Get in Touch - We are Online
               </div>
 
               <DiscountBadge />

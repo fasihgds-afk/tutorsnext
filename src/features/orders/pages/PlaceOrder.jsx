@@ -34,10 +34,22 @@ const getInitialFormData = () => {
     const saved = localStorage.getItem(HERO_ORDER_STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (parsed.assignmentTypeLabel) defaults.typeOfWork = parsed.assignmentTypeLabel;
-      if (parsed.academicLevelLabel) defaults.academicLevel = parsed.academicLevelLabel;
-      if (parsed.subjectLabel) defaults.subject = parsed.subjectLabel;
-      if (parsed.deadlineLabel) defaults.deadline = parsed.deadlineLabel;
+      if (parsed.assignmentTypeLabel || parsed.typeOfWork) {
+        defaults.typeOfWork = parsed.assignmentTypeLabel || parsed.typeOfWork;
+      }
+      if (parsed.academicLevelLabel || parsed.academicLevel) {
+        defaults.academicLevel = parsed.academicLevelLabel || parsed.academicLevel;
+      }
+      if (parsed.subjectLabel || parsed.subject) {
+        defaults.subject = parsed.subjectLabel || parsed.subject;
+      }
+      if (parsed.deadlineLabel || parsed.deadline) {
+        defaults.deadline = parsed.deadlineLabel || parsed.deadline;
+      }
+      if (parsed.pages) {
+        defaults.pages = Number(parsed.pages) || 1;
+        defaults.wordCount = formatWordCount(defaults.pages);
+      }
     }
   } catch (e) {
     console.error('Failed to load hero order data:', e);
@@ -57,6 +69,28 @@ const PlaceOrder = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  // Auto-sync hero order data when navigated from Home
+  useEffect(() => {
+    if (orderIdParam) return;
+    try {
+      const saved = localStorage.getItem(HERO_ORDER_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setFormData((prev) => ({
+          ...prev,
+          typeOfWork: parsed.assignmentTypeLabel || parsed.typeOfWork || prev.typeOfWork,
+          academicLevel: parsed.academicLevelLabel || parsed.academicLevel || prev.academicLevel,
+          subject: parsed.subjectLabel || parsed.subject || prev.subject,
+          deadline: parsed.deadlineLabel || parsed.deadline || prev.deadline,
+          pages: parsed.pages ? Number(parsed.pages) : prev.pages,
+          wordCount: parsed.pages ? formatWordCount(Number(parsed.pages)) : prev.wordCount,
+        }));
+      }
+    } catch (e) {
+      console.error('Failed to sync hero order data:', e);
+    }
+  }, [orderIdParam]);
 
   // Load existing order when editing (orderId in URL)
   useEffect(() => {
