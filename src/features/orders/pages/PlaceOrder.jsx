@@ -284,13 +284,13 @@ const PlaceOrder = () => {
             </div>
           </div>
 
-          {/* Right: Sidebar — image only */}
+          {/* Right: Sidebar — features & discount banner */}
           <div className="lg:col-span-5 flex flex-col gap-5">
-            <div className="sticky top-24">
+            <div className="sticky top-24 flex justify-center">
               <img
-                src="/Oder_detai.png"
-                alt="Order details preview"
-                className="w-full rounded-xl shadow-sm border border-slate-200 object-cover"
+                src="/student.png"
+                alt="Student discount and free features"
+                className="w-full max-w-[420px] rounded-2xl shadow-sm object-contain"
               />
             </div>
           </div>

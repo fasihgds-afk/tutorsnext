@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '../../../../config/siteConfig';
+import { useHomeContext } from '../../../../hooks/useHomeContext';
 
 const OrderCostPanel = ({
   basePrice,
@@ -15,7 +16,8 @@ const OrderCostPanel = ({
   isPaid,
   orderStatus,
 }) => {
-  const phone = SITE_CONFIG.phoneHome1 || SITE_CONFIG.phone;
+  const { phone: contextPhone } = useHomeContext();
+  const phone = contextPhone || SITE_CONFIG.phone;
 
   return (
     <>
