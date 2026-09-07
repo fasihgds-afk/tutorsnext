@@ -35,6 +35,7 @@ export const SEO_ROUTES_CONFIG = {
     '/essay-4': 'home',
     '/essay-5': 'home',
     '/essay-6': 'home',
+    '/essay-7': 'auto',
 
     '/paper-1': 'home',
     '/paper-2': 'home',
