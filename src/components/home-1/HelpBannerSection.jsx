@@ -2,8 +2,10 @@ import React from 'react';
 import { SITE_CONFIG } from '../../config/siteConfig';
 import Icon from '../common/Icon';
 import { helpBanner } from '../../config/sectionIcons';
+import { useHomeContext } from '../../hooks/useHomeContext';
 
 const HelpBannerSection = () => {
+  const { phone } = useHomeContext();
   return (
     <section className="w-full bg-surface py-10 px-4 sm:px-10 lg:px-16 xl:px-20">
       <div className="w-full max-w-[1040px] mx-auto">
@@ -86,13 +88,11 @@ const HelpBannerSection = () => {
                 </button>
 
                 <a
-                  href={SITE_CONFIG.whatsapp.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={phone.href}
                   className="btn-fill-hover-ghost inline-flex items-center justify-center gap-2 text-[14px] font-bold px-5 py-3 rounded-[12px] w-full sm:w-auto whitespace-nowrap">
                   <span className="inline-flex items-center justify-center gap-2">
                     <Icon icon={helpBanner.phone} className="w-4 h-4" />
-                    Call Now
+                    {phone.display}
                   </span>
                 </a>
               </div>
