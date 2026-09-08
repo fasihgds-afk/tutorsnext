@@ -37,6 +37,7 @@ export const SEO_ROUTES_CONFIG = {
     '/essay-6': 'auto',
     '/essay-7': 'auto',
     '/essay-8': 'auto',
+    '/essay-9': 'auto',
 
     '/paper-1': 'auto',
     '/paper-2': 'auto',
