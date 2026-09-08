@@ -26,8 +26,8 @@ export const SITE_CONFIG = {
     href: 'tel:+14068205727',
   },
   phoneHome1: {
-    display: '+1 (908) 695-0632',
-    href: 'tel:+19086950632',
+    display: '+92 344 7990137',
+    href: 'tel:+923447990137',
   },
   whatsapp: {
     display: '+1 (908) 695-0632',
