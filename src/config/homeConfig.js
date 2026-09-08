@@ -12,14 +12,14 @@ import { SITE_CONFIG } from './siteConfig.js';
 //    1) Change all 'auto' pages together by toggling `activeHome` in siteConfig.js
 //    2) Make 3 specific pages show Home-1 while others show Home:
 //       routes: {
-//         '/essay-1': 'home',
+//         '/essay-1': 'auto',
 //         '/paper-1': 'home-1',
 //         '/termpaper-1': 'home-1',
 //         '/researchpaper-1': 'home-1',
-//         '/assignment-1': 'home',
-//         '/homework-1': 'home',
-//         '/thesis-1': 'home',
-//         '/dissertation-1': 'home',
+//         '/assignment-1': 'auto',
+//         '/homework-1': 'auto',
+//         '/thesis-1': 'auto',
+//         '/dissertation-1': 'auto',
 //       }
 // ─────────────────────────────────────────────────────────────
 export const SEO_ROUTES_CONFIG = {
@@ -29,22 +29,22 @@ export const SEO_ROUTES_CONFIG = {
   // Per-route mapping
   routes: {
     // Show Home
-    '/essay-1': 'home',
-    '/essay-2': 'home',
-    '/essay-3': 'home',
-    '/essay-4': 'home',
-    '/essay-5': 'home',
-    '/essay-6': 'home',
+    '/essay-1': 'auto',
+    '/essay-2': 'auto',
+    '/essay-3': 'auto',
+    '/essay-4': 'auto',
+    '/essay-5': 'auto',
+    '/essay-6': 'auto',
     '/essay-7': 'auto',
 
-    '/paper-1': 'home',
-    '/paper-2': 'home',
-    '/paper-3': 'home',
-    '/paper-4': 'home',
-    '/paper-5': 'home',
-    '/paper-6': 'home',
-    '/paper-7': 'home',
-    '/paper-8': 'home',
+    '/paper-1': 'auto',
+    '/paper-2': 'auto',
+    '/paper-3': 'auto',
+    '/paper-4': 'auto',
+    '/paper-5': 'auto',
+    '/paper-6': 'auto',
+    '/paper-7': 'auto',
+    '/paper-8': 'auto',
 
     // Other routes
     '/termpaper-1': 'auto',
