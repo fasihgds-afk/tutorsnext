@@ -103,12 +103,7 @@ const Footer = () => {
                   24/7 Live Support Team
                 </span>
               </li>
-              <li>
-                <span className="flex items-start gap-2.5 text-slate-400 text-xs sm:text-sm">
-                  <Icon icon={footer.location} className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                  <span>Mohala Sadat, Humdanian wala, Dak Khana Khas, Uttra Janobi, Quaidabad, Khushab, Punjab, Pakistan</span>
-                </span>
-              </li>
+
             </ul>
           </div>
 
