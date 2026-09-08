@@ -48,6 +48,9 @@ export const SEO_ROUTES_CONFIG = {
     '/paper-8': 'auto',
     '/paper-9': 'auto',
 
+    '/research-1': 'auto',
+    '/research-2': 'auto',
+
     // Other routes
     '/termpaper-1': 'auto',
     '/researchpaper-1': 'auto',
