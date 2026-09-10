@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import OrderStepTracker from '../components/OrderStepTracker';
 import OrderRequirementsForm from '../components/OrderRequirementsForm';
@@ -7,7 +7,7 @@ import AddonsCard from '../components/AddonsCard';
 import orderApi from '../api/orderApi';
 import tokenManager from '../../../services/auth/tokenManager';
 import { ORDER_STEP, WORDS_PER_PAGE, PLACE_ORDER_ADDONS } from '../constants/orderOptions';
-import { formatWordCount, parseDeadlineKey } from '../utils/orderHelpers';
+import { formatWordCount, parseDeadlineKey, calculateWordCount } from '../utils/orderHelpers';
 import { SITE_TAG } from '../../../config/env';
 import { deadline as deadlineOptions } from '../../../config/dropdown-fields.config';
 
@@ -48,7 +48,7 @@ const getInitialFormData = () => {
       }
       if (parsed.pages) {
         defaults.pages = Number(parsed.pages) || 1;
-        defaults.wordCount = formatWordCount(defaults.pages);
+        defaults.wordCount = formatWordCount(defaults.pages, defaults.lineSpacing);
       }
     }
   } catch (e) {
@@ -84,7 +84,7 @@ const PlaceOrder = () => {
           subject: parsed.subjectLabel || parsed.subject || prev.subject,
           deadline: parsed.deadlineLabel || parsed.deadline || prev.deadline,
           pages: parsed.pages ? Number(parsed.pages) : prev.pages,
-          wordCount: parsed.pages ? formatWordCount(Number(parsed.pages)) : prev.wordCount,
+          wordCount: parsed.pages ? formatWordCount(Number(parsed.pages), prev.lineSpacing) : prev.wordCount,
         }));
       }
     } catch (e) {
@@ -124,7 +124,7 @@ const PlaceOrder = () => {
         projectTitle: order.title || prev.projectTitle,
         deadline: deadlineDisplayLabel,
         pages: order.numberOfPages || prev.pages,
-        wordCount: formatWordCount(order.numberOfPages || 1),
+        wordCount: formatWordCount(order.numberOfPages || 1, lineSpacingDisplayLabel),
         lineSpacing: lineSpacingDisplayLabel,
         guidelines: order.guidelines || prev.guidelines,
         citationStyle: order.citationStyle || prev.citationStyle,
@@ -178,7 +178,7 @@ const PlaceOrder = () => {
       title,
       deadline,
       numberOfPages: pages,
-      wordCount: pages * WORDS_PER_PAGE,
+      wordCount: calculateWordCount(pages, lineSpacing),
       lineSpacing,
       guidelines: formData.guidelines || '',
       citationStyle: formData.citationStyle || 'Non Specific',
@@ -189,19 +189,7 @@ const PlaceOrder = () => {
     };
   };
 
-  // Build a restricted payload for PATCH /pricing — only the 4 fields the backend accepts
-  const buildPricingUpdatePayload = () => {
-    const pages = Math.max(1, parseInt(formData.pages, 10) || 1);
-    // Convert display label → backend key  ("Single Line Space" → "single", anything else → "double")
-    const lineSpacing = formData.lineSpacing?.toLowerCase().includes('single') ? 'single' : 'double';
-    // Convert display label → backend key  ("3 days / Aug 29..." → "3 days")
-    const deadline = parseDeadlineKey(formData.deadline);
-    const addOns = PLACE_ORDER_ADDONS
-      .filter((addon) => !!selectedAddons[addon.id])
-      .map((addon) => addon.name);
 
-    return { deadline, numberOfPages: pages, lineSpacing, addOns };
-  };
 
   /**
    * Step 1 → Step 2: Create or update the draft order in the backend,
