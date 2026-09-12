@@ -73,6 +73,7 @@ export const SEO_ROUTES_CONFIG = {
 
     '/thesis-1': 'auto',
     '/dissertation-1': 'auto',
+    '/homepage-1': 'home',
   },
 };
 
