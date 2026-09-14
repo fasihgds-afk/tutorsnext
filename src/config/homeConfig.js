@@ -29,6 +29,7 @@ export const SEO_ROUTES_CONFIG = {
   // Per-route mapping
   routes: {
     // Show Home
+
     '/essay-1': 'auto',
     '/essay-2': 'auto',
     '/essay-3': 'auto',
@@ -40,7 +41,15 @@ export const SEO_ROUTES_CONFIG = {
     '/essay-9': 'auto',
     '/essay-10': 'auto',
     '/essay-11': 'auto',
-
+    '/essay-12': 'auto',
+    '/essay-13': 'auto',
+    '/essay-14': 'auto',
+    '/essay-15': 'auto',
+    '/essay-16': 'auto',
+    '/essay-17': 'auto',
+    '/essay-18': 'auto',
+    '/essay-19': 'auto',
+    '/essay-20': 'auto',
 
     '/paper-1': 'auto',
     '/paper-2': 'auto',
@@ -51,6 +60,19 @@ export const SEO_ROUTES_CONFIG = {
     '/paper-7': 'auto',
     '/paper-8': 'auto',
     '/paper-9': 'auto',
+    '/paper-10': 'auto',
+    '/paper-11': 'auto',
+    '/paper-12': 'auto',
+    '/paper-13': 'auto',
+    '/paper-14': 'auto',
+    '/paper-15': 'auto',
+    '/paper-16': 'auto',
+    '/paper-17': 'auto',
+    '/paper-18': 'auto',
+    '/paper-19': 'auto',
+    '/paper-20': 'auto',
+    '/paper-21': 'auto',
+
 
     '/research-1': 'auto',
     '/research-2': 'auto',
