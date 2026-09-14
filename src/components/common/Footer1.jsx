@@ -6,7 +6,7 @@ import Icon from './Icon.jsx';
 import { footer } from '../../config/sectionIcons.js';
 
 const Footer1 = () => {
-  const { phone: home1Phone, handleHashLink, homePath } = useHomeContext();
+  const { phone: home1Phone, handleHashLink, homePath, isHome1 } = useHomeContext();
 
   return (
     <footer className="w-full bg-slate-950 font-sans antialiased text-slate-300 pt-16 pb-10 border-t border-slate-800/80 relative overflow-hidden">
@@ -85,30 +85,15 @@ const Footer1 = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Contact Us</h3>
             <ul className="space-y-3">
-              <li>
-                <a href={home1Phone.href} className="flex items-center gap-2.5 text-slate-400 hover:text-sky-400 text-xs sm:text-sm transition-colors">
-                  <Icon icon={footer.phone} className="w-4 h-4 text-sky-400 shrink-0" />
-                  {home1Phone.display}
-                </a>
-              </li>
-              <li>
-                <a href={SITE_CONFIG.email.href} className="flex items-center gap-2.5 text-slate-400 hover:text-sky-400 text-xs sm:text-sm transition-colors">
-                  <Icon icon={footer.email} className="w-4 h-4 text-sky-400 shrink-0" />
-                  {SITE_CONFIG.email.display}
-                </a>
-              </li>
+             
+             
               <li>
                 <span className="flex items-center gap-2.5 text-slate-400 text-xs sm:text-sm">
                   <Icon icon={footer.chat} className="w-4 h-4 text-sky-400 shrink-0" />
                   24/7 Live Support Team
                 </span>
               </li>
-              <li>
-                <span className="flex items-start gap-2.5 text-slate-400 text-xs sm:text-sm">
-                  <Icon icon={footer.location} className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                  <span>Office # 1, Choudhary Plaza, Third Floor, Plot 6/7 N, Main Block, Swan Garden, Islamabad</span>
-                </span>
-              </li>
+             
             </ul>
           </div>
 

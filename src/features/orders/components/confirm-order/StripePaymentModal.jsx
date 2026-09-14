@@ -102,11 +102,17 @@ const PaymentFailed = ({ errorMsg, onRetry, onCancel }) => (
       </svg>
     </div>
 
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       <h3 className="text-xl font-black text-slate-900">Payment Failed</h3>
-      <p className="text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
-        {errorMsg || 'Something went wrong. Please check your card details and try again.'}
+      <p className="text-sm text-red-600 font-medium max-w-xs mx-auto leading-relaxed">
+        {errorMsg || 'Something went wrong with your payment.'}
       </p>
+      <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-2">
+        <p className="text-xs text-amber-800 leading-relaxed">
+          <span className="font-semibold">Need help?</span> Contact your bank or try a different payment method. 
+          You can also use Klarna, Link, or Amazon Pay as alternatives.
+        </p>
+      </div>
     </div>
 
     <div className="flex flex-col gap-2.5 w-full">
@@ -151,8 +157,37 @@ const CheckoutForm = ({ finalAmount, currency, onSuccess, onFailed, onCancel }) 
     });
 
     if (error) {
-      // Show failed screen instead of inline error
-      onFailed(error.message || 'Payment failed. Please try again.');
+      // Map Stripe error codes to user-friendly messages
+      let userMessage = error.message || 'Payment failed. Please try again.';
+      
+      switch (error.code) {
+        case 'card_declined':
+          if (error.decline_code === 'insufficient_funds') {
+            userMessage = 'Your card has insufficient funds. Please use a different payment method.';
+          } else if (error.decline_code === 'generic_decline') {
+            userMessage = 'Your card was declined. Please contact your bank or try a different card.';
+          } else {
+            userMessage = 'Your card was declined. Please try a different payment method.';
+          }
+          break;
+        case 'expired_card':
+          userMessage = 'Your card has expired. Please use a different payment method.';
+          break;
+        case 'incorrect_cvc':
+          userMessage = 'Your card security code is incorrect. Please check and try again.';
+          break;
+        case 'processing_error':
+          userMessage = 'There was a processing error. Please try again in a few minutes.';
+          break;
+        case 'incorrect_number':
+          userMessage = 'Your card number is incorrect. Please check and try again.';
+          break;
+        default:
+          // Use the original message for other errors
+          userMessage = error.message || 'Payment failed. Please check your card details and try again.';
+      }
+      
+      onFailed(userMessage);
       setIsProcessing(false);
       return;
     }

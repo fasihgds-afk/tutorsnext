@@ -24,7 +24,9 @@ const OrderCostPanel = ({
   const discountedOrderPrice = baseOrderPrice; // After 50% discount
   const orderDiscount = originalOrderPrice - discountedOrderPrice; // 50% discount amount
   const addonsPrice = addonsCost != null ? Number(addonsCost) : 0;
-  const finalPrice = discountedOrderPrice + addonsPrice;
+  
+  // Use backend finalAmount if available (includes admin discounts), otherwise calculate frontend price
+  const finalPrice = finalAmount != null ? Number(finalAmount) : (discountedOrderPrice + addonsPrice);
 
   return (
     <>
@@ -71,20 +73,26 @@ const OrderCostPanel = ({
 
           {/* Backend additional discount if present */}
           {discountAmount > 0 && (
-            <div className="flex items-center justify-between py-2.5 text-sm">
-              <span className="text-slate-600">
-                Additional Discount
-                {discountPercentage > 0 && ` (${discountPercentage}%)`}
-                {discountReason && <span className="text-slate-400 font-normal"> — {discountReason}</span>}
+            <div className="flex items-center justify-between py-2.5 text-sm bg-red-50/70 -mx-5 px-5">
+              <span className="text-red-800 font-semibold flex items-center gap-1.5">
+                <span>Additional Discount</span>
+                {discountPercentage > 0 && (
+                  <span className="bg-red-200/90 text-red-900 text-[10px] font-black px-1.5 py-0.5 rounded">
+                    {discountPercentage.toFixed(0)}%
+                  </span>
+                )}
+                {discountReason && <span className="text-red-600 font-normal text-xs"> — {discountReason}</span>}
               </span>
-              <span className="font-bold text-emerald-600">−${Number(discountAmount).toFixed(2)}</span>
+              <span className="font-bold text-red-600">−${Number(discountAmount).toFixed(2)}</span>
             </div>
           )}
 
           <div className="flex items-center justify-between py-3">
             <div>
               <span className="font-black text-slate-900 text-base uppercase block">Final Amount</span>
-              <span className="text-[11px] text-emerald-600 font-semibold">You save 50% on order</span>
+              <span className="text-[11px] text-emerald-600 font-semibold">
+                {discountAmount > 0 ? `You save ${discountPercentage ? discountPercentage.toFixed(0) + '%' : 'extra'} + 50% on order` : 'You save 50% on order'}
+              </span>
             </div>
             <div className="flex items-baseline gap-2">
               {baseOrderPrice > 0 && (

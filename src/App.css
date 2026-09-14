@@ -17,6 +17,66 @@
   }
 }
 
+/* Remove all borders, outlines, and circular styling from phone links */
+a[href^="tel:"], a[href*="tel:"] {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  border-radius: 0 !important;
+}
+
+a[href^="tel:"]:hover, a[href*="tel:"]:hover {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+a[href^="tel:"]:focus, a[href*="tel:"]:focus {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Remove circular styling from header phone elements */
+.header-phone-pulse, a.header-phone-pulse {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  border-radius: 0 !important;
+}
+
+/* Target any element that might contain phone numbers */
+a[href*="344"], a[href*="799"], a[href*="92"], 
+span:contains("+92"), span:contains("344"), span:contains("799") {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+/* Remove borders from any blue or sky colored elements */
+.text-primary, .text-blue-500, .text-sky-500 {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Hide phone elements only on Home-1 (tutoring page) */
+/* Remove the blanket hiding rule - now controlled by React conditional rendering */
+
+/* Aggressive override for any element with border */
+* {
+  border: none !important;
+}
+
 .hero {
   position: relative;
 

@@ -18,17 +18,17 @@ const StudentNavbar = () => {
   };
 
   return (
-    <header className="w-full bg-white shadow-xs border-b border-slate-100 sticky top-0 z-50 relative">
+    <header className="header-main w-full bg-white shadow-xs border-b border-slate-100 sticky top-0 z-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
           {/* Left: Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center shrink-0 group">
+            <Link to="/" className="flex items-center shrink-0 group header-logo-hover">
               <img
                 src={SITE_CONFIG.logo.header.src}
                 alt={SITE_CONFIG.logo.alt}
-                className={SITE_CONFIG.logo.header.className}
+                className={`${SITE_CONFIG.logo.header.className} transition-all duration-300`}
               />
             </Link>
           </div>
@@ -52,7 +52,7 @@ const StudentNavbar = () => {
             {/* Create Order Button */}
             <Link
               to="/Order/PlaceOrder"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold text-sm px-4 py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              className="header-cta-button flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold text-sm px-4 py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
             >
               <Icon icon={studentNav.createOrder} className="w-4 h-4" />
               <span>Create Order</span>
@@ -87,7 +87,9 @@ const StudentNavbar = () => {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+              className="header-focus-ring p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none transition-colors duration-200"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <Icon icon={studentNav.close} className="w-6 h-6" />
@@ -102,7 +104,7 @@ const StudentNavbar = () => {
 
       {/* Mobile Dropdown — absolutely positioned so it overlaps content */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-lg z-50 px-4 py-4 flex flex-col gap-3">
+        <div className="header-dropdown header-mobile-menu md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-lg z-50 px-4 py-4 flex flex-col gap-3">
           <a
             href={phone.href}
             className="flex items-center gap-2 text-slate-800 font-semibold text-sm py-2 px-3 rounded-lg bg-slate-50"
