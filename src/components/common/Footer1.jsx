@@ -85,15 +85,18 @@ const Footer1 = () => {
           <div className="flex flex-col">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-5">Contact Us</h3>
             <ul className="space-y-3">
-             
-             
+              <li>
+                <a href={home1Phone.href} className="flex items-center gap-2.5 text-slate-400 hover:text-sky-400 text-xs sm:text-sm transition-colors">
+                  <Icon icon={footer.phone} className="w-4 h-4 text-sky-400 shrink-0" />
+                  {home1Phone.display}
+                </a>
+              </li>
               <li>
                 <span className="flex items-center gap-2.5 text-slate-400 text-xs sm:text-sm">
                   <Icon icon={footer.chat} className="w-4 h-4 text-sky-400 shrink-0" />
                   24/7 Live Support Team
                 </span>
               </li>
-             
             </ul>
           </div>
 

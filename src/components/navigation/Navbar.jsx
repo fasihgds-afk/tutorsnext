@@ -66,16 +66,14 @@ const Navbar = () => {
 
           {/* Right: Phone + Actions */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Phone — only show on xl and hide for Home-1 */}
-            {!isHome1 && (
-              <a
-                href={currentPhone.href}
-                className="header-phone-pulse hidden xl:flex items-center gap-1.5 text-primary font-medium text-sm hover:text-primary-hover transition-colors whitespace-nowrap"
-              >
-                <Icon icon={nav.phone} className="w-4 h-4 shrink-0" />
-                <span>{currentPhone.display}</span>
-              </a>
-            )}
+            {/* Phone — show on xl for both Home and Home-1 */}
+            <a
+              href={currentPhone.href}
+              className="header-phone-pulse hidden xl:flex items-center gap-1.5 text-primary font-medium text-sm hover:text-primary-hover transition-colors whitespace-nowrap"
+            >
+              <Icon icon={nav.phone} className="w-4 h-4 shrink-0" />
+              <span>{currentPhone.display}</span>
+            </a>
 
             {isHome1 ? (
               /* Home-1: Hire A Tutor — scrolls to hero form */
@@ -173,15 +171,13 @@ const Navbar = () => {
               FAQs
             </a>
             <div className="pt-4 border-t border-gray-100 flex flex-col gap-3 px-3">
-              {!isHome1 && (
-                <a
-                  href={currentPhone.href}
-                  className="flex items-center space-x-2 text-primary font-semibold"
-                >
-                  <Icon icon={nav.phone} className="w-5 h-5" />
-                  <span>{currentPhone.display}</span>
-                </a>
-              )}
+              <a
+                href={currentPhone.href}
+                className="flex items-center space-x-2 text-primary font-semibold"
+              >
+                <Icon icon={nav.phone} className="w-5 h-5" />
+                <span>{currentPhone.display}</span>
+              </a>
               {isHome1 ? (
                 /* Home-1: Hire A Tutor — scrolls to hero form */
                 <a

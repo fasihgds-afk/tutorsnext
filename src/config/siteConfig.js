@@ -26,8 +26,8 @@ export const SITE_CONFIG = {
     href: 'tel:+14068205727',
   },
   phoneHome1: {
-    display: '',
-    href: '',
+    display: '+1 (406) 820 5727',
+    href: 'tel:+14068205727',
   },
   whatsapp: {
     display: '+1 (908) 695-0632',
