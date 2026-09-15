@@ -30,7 +30,7 @@ export const SEO_ROUTES_CONFIG = {
   routes: {
     // Show Home
 
-    '/essay-1': 'auto',
+    '/essay-1': 'home',
     '/essay-2': 'auto',
     '/essay-3': 'auto',
     '/essay-4': 'auto',
