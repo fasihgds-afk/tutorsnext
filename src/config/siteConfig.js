@@ -1,8 +1,3 @@
-// ─────────────────────────────────────────────
-//  Central site configuration
-//  Edit contact details OR route paths here —
-//  all components pick them up automatically.
-// ─────────────────────────────────────────────
 
 export const SITE_CONFIG = {
   logo: {
@@ -17,37 +12,47 @@ export const SITE_CONFIG = {
     },
     favicon: '/images/Favicon TutorsNext.png',
   },
+
   phone: {
-    display: '+1 (406) 820 5727',
-    href: 'tel:+14068205727',
+    display: '(908) 695-0632',
+    href: 'tel:9086950632',
   },
+
   phoneHome: {
-    display: '+1 (406) 820 5727',
-    href: 'tel:+14068205727',
+    display: '(908) 695-0632',
+    href: 'tel:9086950632',
   },
+
   phoneHome1: {
-    display: '+1 (406) 820 5727',
-    href: 'tel:+14068205727',
+    display: '(908) 695-0632',
+    href: 'tel:9086950632',
   },
+
   whatsapp: {
-    display: '+1 (908) 695-0632',
-    href: 'tel:+19086950632',
+    display: '(908) 695-0632',
+    href: 'tel:9086950632',
   },
+
   email: {
     display: 'care@tutorsnext.com',
     href: 'mailto:care@tutorsnext.com',
   },
+
   // Change activeHome to 'home' or 'home-1' to choose which home shows on '/'
   activeHome: 'home-1',
+
   // Website tag for backend multi-tenant identification
   tag: import.meta.env.VITE_SITE_TAG || 'tutorsnext',
+
   routes: {
-    register: '/register',   // Change once here — updates Navbar & everywhere else
+    register: '/register',
     login: '/login',
   },
 };
 
 // Re-export centralized home & SEO helpers for backward compatibility
-export { HOME_1_SEO_ROUTES, checkIsHome1Path as isHome1Route } from './homeConfig';
-
+export {
+  HOME_1_SEO_ROUTES,
+  checkIsHome1Path as isHome1Route,
+} from './homeConfig';
 
