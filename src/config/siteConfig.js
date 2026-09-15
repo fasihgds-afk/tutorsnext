@@ -14,24 +14,25 @@ export const SITE_CONFIG = {
   },
 
   phone: {
-    display: '(908) 695-0632',
-    href: 'tel:9086950632',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
 
   phoneHome: {
-    display: '(908) 695-0632',
-    href: 'tel:9086950632',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
 
   phoneHome1: {
-    display: '(908) 695-0632',
-    href: 'tel:9086950632',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
 
   whatsapp: {
-    display: '(908) 695-0632',
-    href: 'tel:9086950632',
+    display: '+1 (908) 695-0632',
+    href: 'tel:+19086950632',
   },
+
 
   email: {
     display: 'care@tutorsnext.com',
