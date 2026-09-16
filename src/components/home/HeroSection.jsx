@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileText, Clock } from 'lucide-react';
+import { FileText, Clock, File } from 'lucide-react';
 import Icon from '../common/Icon';
 import DiscountBadge from '../common/DiscountBadge';
 import { hero } from '../../config/sectionIcons';
@@ -247,7 +247,7 @@ const HeroSection = () => {
                 {/* Number of Pages */}
                 <div className={`group flex items-center gap-3 ${calculatedPrice ? 'gap-2' : 'gap-3'}`}>
                   <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-8 h-8 lg:w-9 lg:h-9' : ''}`}>
-                    <Clock className={`w-4 h-4 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3.5 h-3.5' : ''}`} />
+                    <File className={`w-4 h-4 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3.5 h-3.5' : ''}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <label className={`text-[11px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[10px] mb-0.5' : ''}`}>Number of Pages</label>
