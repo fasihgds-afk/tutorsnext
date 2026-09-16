@@ -1,106 +1,24 @@
 import { SITE_CONFIG } from './siteConfig.js';
 
 // ─────────────────────────────────────────────────────────────
-//  SEO Landing Routes Configuration
+//  Dynamic Route Configuration
 //
-//  You can set any route to:
-//    - 'auto'   : dynamically follows SITE_CONFIG.activeHome ('home' -> Home, 'home1' -> Home-1)
-//    - 'home'   : always displays Home
-//    - 'home-1' : always displays Home-1 (or 'home1')
+//  Routes are now controlled by the backend via the activeRoutes API.
+//  This file only contains utility functions for backward compatibility
+//  and helper functions that are still used by some components.
 //
-//  Examples:
-//    1) Change all 'auto' pages together by toggling `activeHome` in siteConfig.js
-//    2) Make 3 specific pages show Home-1 while others show Home:
-//       routes: {
-//         '/essay-1': 'auto',
-//         '/paper-1': 'home-1',
-//         '/termpaper-1': 'home-1',
-//         '/researchpaper-1': 'home-1',
-//         '/assignment-1': 'auto',
-//         '/homework-1': 'auto',
-//         '/thesis-1': 'auto',
-//         '/dissertation-1': 'auto',
-//       }
+//  The backend determines which routes show Real Home vs Demo Home
+//  through the /api/v1/public/active-routes endpoint.
 // ─────────────────────────────────────────────────────────────
+
+// Empty config - routes are now dynamic from backend
 export const SEO_ROUTES_CONFIG = {
-  // Global default for routes configured as 'auto' or unspecified
   defaultVariant: 'auto',
-
-  // Per-route mapping
-  routes: {
-    // Show Home
-
-    '/essay-1': 'home',
-    '/essay-2': 'auto',
-    '/essay-3': 'auto',
-    '/essay-4': 'auto',
-    '/essay-5': 'auto',
-    '/essay-6': 'auto',
-    '/essay-7': 'auto',
-    '/essay-8': 'auto',
-    '/essay-9': 'auto',
-    '/essay-10': 'auto',
-    '/essay-11': 'auto',
-    '/essay-12': 'auto',
-    '/essay-13': 'auto',
-    '/essay-14': 'auto',
-    '/essay-15': 'auto',
-    '/essay-16': 'auto',
-    '/essay-17': 'auto',
-    '/essay-18': 'auto',
-    '/essay-19': 'auto',
-    '/essay-20': 'auto',
-
-    '/paper-1': 'auto',
-    '/paper-2': 'auto',
-    '/paper-3': 'auto',
-    '/paper-4': 'auto',
-    '/paper-5': 'auto',
-    '/paper-6': 'auto',
-    '/paper-7': 'auto',
-    '/paper-8': 'auto',
-    '/paper-9': 'auto',
-    '/paper-10': 'auto',
-    '/paper-11': 'auto',
-    '/paper-12': 'auto',
-    '/paper-13': 'auto',
-    '/paper-14': 'auto',
-    '/paper-15': 'auto',
-    '/paper-16': 'auto',
-    '/paper-17': 'auto',
-    '/paper-18': 'auto',
-    '/paper-19': 'auto',
-    '/paper-20': 'auto',
-    '/paper-21': 'auto',
-
-
-    '/research-1': 'auto',
-    '/research-2': 'auto',
-
-    // Other routes
-    '/termpaper-1': 'auto',
-    '/researchpaper-1': 'auto',
-    '/assignment-1': 'auto',
-
-    '/homework-1': 'auto',
-    '/homework-2': 'auto',
-    '/homework-3': 'auto',
-    '/homework-4': 'auto',
-    '/homework-5': 'auto',
-    '/homework-6': 'auto',
-    '/homework-7': 'auto',
-    '/homework-8': 'auto',
-    '/homework-9': 'auto',
-    '/homework-10': 'auto',
-
-    '/thesis-1': 'auto',
-    '/dissertation-1': 'auto',
-    '/homepage-1': 'auto',
-  },
+  routes: {},
 };
 
-// Array of all SEO route paths
-export const HOME_1_SEO_ROUTES = Object.keys(SEO_ROUTES_CONFIG.routes);
+// Empty array - routes are now dynamic from backend
+export const HOME_1_SEO_ROUTES = [];
 
 export const HOME_1_PATH = '/home-1';
 export const HOME_DEFAULT_PATH = '/';
@@ -119,6 +37,7 @@ const normalizePath = (pathname = '') => {
 
 /**
  * Check if the site configuration sets Home-1 as the active homepage for '/'.
+ * This is kept for backward compatibility but should use dynamic backend logic.
  */
 export const checkIsActiveHome1 = (activeHomeSetting = SITE_CONFIG.activeHome) => {
   const val = String(activeHomeSetting || '').trim().toLowerCase();
@@ -127,6 +46,7 @@ export const checkIsActiveHome1 = (activeHomeSetting = SITE_CONFIG.activeHome) =
 
 /**
  * Resolves the variant ('home' | 'home1') for a given pathname.
+ * This is kept for backward compatibility but should use dynamic backend logic.
  */
 export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.activeHome) => {
   const cleanPath = normalizePath(pathname);
@@ -143,34 +63,13 @@ export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.a
     return 'home';
   }
 
-  // 3. Configured SEO Routes (explicit lookup only — no need to re-check
-  //    HOME_1_SEO_ROUTES, since it's just Object.keys(SEO_ROUTES_CONFIG.routes))
-  const configuredVariant = SEO_ROUTES_CONFIG.routes[cleanPath];
-
-  if (configuredVariant) {
-    const val = String(configuredVariant).trim().toLowerCase();
-    if (val === 'home-1' || val === 'home1' || val === '1') {
-      return 'home1';
-    }
-    if (val === 'home' || val === '0') {
-      return 'home';
-    }
-    if (val === 'auto' || val === 'active') {
-      return activeIsHome1 ? 'home1' : 'home';
-    }
-  }
-
-  // 4. Root '/' when activeHome is Home-1
+  // 3. Root '/' when activeHome is Home-1
   if (cleanPath === '/') {
     return activeIsHome1 ? 'home1' : 'home';
   }
 
-  // 5. Shared public pages (reviews, etc.) inherit Home-1 when activeHome is Home-1,
+  // 4. Shared public pages inherit Home-1 when activeHome is Home-1,
   //    except for explicit auth, account, or student routes.
-  //    NOTE: '/home', '/home-1', '/home1' are already returned above in steps 1-2,
-  //    so we only need to exclude the *other* reserved sections here — using an
-  //    exact-prefix-with-boundary check so routes like '/homework-11' or
-  //    '/home-services' (not otherwise configured) aren't accidentally excluded.
   const reservedPrefixes = ['/login', '/register', '/account', '/student', '/order', '/user-area'];
   const isReserved = reservedPrefixes.some(
     (prefix) => cleanPath === prefix || cleanPath.startsWith(`${prefix}/`)
@@ -185,23 +84,10 @@ export const getRouteVariant = (pathname = '', activeHomeSetting = SITE_CONFIG.a
 
 /**
  * Check if a given pathname belongs to Home-1 (explicit, SEO, or active).
+ * This is kept for backward compatibility but should use dynamic backend logic.
  */
 export const checkIsHome1Path = (pathname = '', activeHomeSetting = SITE_CONFIG.activeHome) => {
   return getRouteVariant(pathname, activeHomeSetting) === 'home1';
-};
-
-/**
- * Check if the current pathname is a landing page with section IDs.
- */
-export const checkIsLandingPath = (pathname = '') => {
-  const cleanPath = normalizePath(pathname);
-  return (
-    cleanPath === '/' ||
-    cleanPath === '/home' ||
-    cleanPath === '/home-1' || cleanPath.startsWith('/home-1/') ||
-    cleanPath === '/home1' || cleanPath.startsWith('/home1/') ||
-    Boolean(SEO_ROUTES_CONFIG.routes[cleanPath])
-  );
 };
 
 /**

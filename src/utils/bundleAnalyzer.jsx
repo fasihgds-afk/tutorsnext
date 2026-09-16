@@ -2,39 +2,87 @@ import React, { Suspense } from 'react';
 
 // Log bundle information in development
 export const logBundleInfo = () => {
-  if (import.meta.env.DEV) {
-    console.group('📦 Bundle Analysis');
-    
-    // Estimate JavaScript bundle size
-    const scripts = Array.from(document.querySelectorAll('script[src]'));
-    let totalSize = 0;
-    
-    scripts.forEach((script, index) => {
-      const src = script.src;
-      if (src.includes('localhost') || src.includes('127.0.0.1')) {
-        console.log(`Script ${index + 1}: ${src.split('/').pop()}`);
+  if (!import.meta.env.DEV) return;
+
+  console.group('📦 Bundle Analysis');
+
+  // ── List local script tags ──────────────────────────────────────────
+  const scripts = Array.from(document.querySelectorAll('script[src]'));
+  scripts.forEach((script, index) => {
+    const src = script.src;
+    if (src.includes('localhost') || src.includes('127.0.0.1')) {
+      console.log(`Script ${index + 1}: ${src.split('/').pop()}`);
+    }
+  });
+
+  // ── Performance metrics (modern API, no deprecated fields) ──────────
+  //
+  // Uses PerformanceNavigationTiming from the Resource Timing Level 2 spec.
+  // All values here are *relative* to navigationStart, so subtraction is safe
+  // (no more "1.789 trillion ms" caused by mixing epoch timestamps).
+  if (window.performance && typeof window.performance.getEntriesByType === 'function') {
+    const navEntry = window.performance.getEntriesByType('navigation')[0];
+
+    const printMetric = (label, valueMs) => {
+      if (typeof valueMs !== 'number' || !isFinite(valueMs) || valueMs < 0) {
+        console.log(`${label}: (still loading — refresh the page after it fully settles)`);
+        return;
       }
-    });
-    
-    // Log performance metrics
-    if (window.performance && window.performance.navigation) {
-      const timing = window.performance.timing;
-      const loadTime = timing.loadEventEnd - timing.navigationStart;
-      const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
-      
-      console.log(`⏱️ Load Time: ${loadTime}ms`);
-      console.log(`🏠 DOM Ready: ${domReady}ms`);
+      const seconds = valueMs / 1000;
+      const human =
+        valueMs < 1000
+          ? `${valueMs.toFixed(0)}ms`
+          : `${seconds.toFixed(2)}s (${valueMs.toFixed(0)}ms)`;
+      console.log(`${label}: ${human}`);
+    };
+
+    if (navEntry) {
+      // navEntry.duration only becomes final after loadEventEnd fires;
+      // if we run before that, fall back to the current wall-time delta.
+      const durationFinal =
+        navEntry.duration > 0 && isFinite(navEntry.duration)
+          ? navEntry.duration
+          : performance.now();
+
+      printMetric('⏱️ Load Time (page duration)', durationFinal);
+      printMetric(
+        '🏠 DOM Ready (DOMContentLoaded)',
+        navEntry.domContentLoadedEventEnd,
+      );
+      printMetric(
+        '🗺️ First Byte (responseStart)',
+        navEntry.responseStart,
+      );
+      printMetric(
+        '🎨 Largest Contentful Paint (estimate, when available)',
+        (() => {
+          try {
+            const lcp = performance.getEntriesByType('largest-contentful-paint').slice(-1)[0];
+            return lcp ? lcp.startTime : NaN;
+          } catch {
+            return NaN;
+          }
+        })(),
+      );
+    } else {
+      // Fallback (some browsers during early execution): use a single relative-timestamp diff.
+      printMetric('⏱️ Load Time (est. since navigationStart)', performance.now());
     }
-    
-    // Log memory usage if available
-    if (window.performance && window.performance.memory) {
-      const memory = window.performance.memory;
-      console.log(`💾 JS Heap Used: ${(memory.usedJSHeapSize / 1048576).toFixed(2)} MB`);
-      console.log(`💾 JS Heap Total: ${(memory.totalJSHeapSize / 1048576).toFixed(2)} MB`);
-    }
-    
-    console.groupEnd();
   }
+
+  // ── Memory (Chrome-only extension API) ──────────────────────────────
+  if (window.performance && window.performance.memory) {
+    const memory = window.performance.memory;
+    const toMB = (b) => (b / 1048576).toFixed(2);
+    console.log(`💾 JS Heap Used:  ${toMB(memory.usedJSHeapSize)} MB`);
+    console.log(`💾 JS Heap Total: ${toMB(memory.totalJSHeapSize)} MB`);
+    if (memory.jsHeapSizeLimit) {
+      const pct = ((memory.usedJSHeapSize / memory.jsHeapSizeLimit) * 100).toFixed(1);
+      console.log(`💾 JS Heap Limit: ${toMB(memory.jsHeapSizeLimit)} MB (${pct}% used)`);
+    }
+  }
+
+  console.groupEnd();
 };
 
 // Performance monitoring hook

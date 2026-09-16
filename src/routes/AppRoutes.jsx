@@ -1,10 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import PublicLayout from '../layouts/PublicLayout';
 import StudentLayout from '../layouts/StudentLayout';
 import Loader from '../components/common/Loader';
 import { SITE_CONFIG } from '../config/siteConfig';
-import { HOME_1_SEO_ROUTES, checkIsActiveHome1, checkIsHome1Path } from '../config/homeConfig';
+import { useAppConfig } from '../context/AppConfigContext';
+import { normalizePathLikeBackend } from '../services/api/homeRoutesApi';
+import { isReservedPath, getHomeVariant, HOME_VARIANT } from '../constants/routeConfig';
 
 // Lazy load components for code splitting
 const Home = lazy(() => import('../features/home/Home'));
@@ -28,28 +30,72 @@ const LoadingWrapper = ({ children }) => (
   </Suspense>
 );
 
-// Dynamic SEO route component rendering Home or Home-1 according to configuration
-const DynamicSEORoute = ({ path }) => {
-  const isH1 = checkIsHome1Path(path);
-  return (
-    <LoadingWrapper>
-      {isH1 ? <Home1 /> : <Home />}
-    </LoadingWrapper>
-  );
+/**
+ * Real/Demo homepage gate — the single source of truth for every
+ * backend-controlled SEO/landing route (/, /essay-1, /paper-4, ...).
+ *
+ * Decision is data-driven only. Nothing here is guessed from the URL shape
+ * (no regex pattern list) — every path is checked against the route
+ * documents the backend actually returned for this site tag, fetched once
+ * at app init and cached in AppConfigContext:
+ *
+ *   1. Reserved app route (/login, /account, ...)  → let the static routes
+ *      below handle it; this gate never renders for those.
+ *   2. Path is in activeRoutes (isRealHomePage: true)   → RealHomePage (Home)
+ *   3. Path is in knownRoutes  (isRealHomePage: false)  → DemoHomePage (Home1)
+ *   4. Path is in NEITHER — never created in the backend → redirect to "/".
+ *      This is what fixes /paper-19, /paper/books, etc. incorrectly
+ *      rendering a homepage just because they *look* like an SEO route.
+ *
+ * While loading: shows a centered Loader (never accidentally exposes real
+ * or demo content before the backend has actually been consulted).
+ */
+const HomeRouteGate = () => {
+  const { isPathRealHome, isPathKnown, activeRoutesLoaded } = useAppConfig();
+  const location = useLocation();
+  const normalizedPath = normalizePathLikeBackend(location.pathname);
+
+  if (!activeRoutesLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isReservedPath(normalizedPath)) {
+    return <Navigate to="/" replace />;
+  }
+
+  const variant = getHomeVariant(isPathRealHome, isPathKnown, normalizedPath);
+
+  if (variant === HOME_VARIANT.REAL) {
+    return (
+      <LoadingWrapper>
+        <Home />
+      </LoadingWrapper>
+    );
+  }
+
+  if (variant === HOME_VARIANT.DEMO) {
+    return (
+      <LoadingWrapper>
+        <Home1 />
+      </LoadingWrapper>
+    );
+  }
+
+  // NOT_FOUND: path doesn't exist in the backend's route config for this
+  // site tag — not real, not a known demo page. Don't render either homepage.
+  return <Navigate to="/" replace />;
 };
 
 const AppRoutes = () => {
-  const ActiveHome = checkIsActiveHome1() ? Home1 : Home;
-
   return (
     <Routes>
       {/* Public Routes with Full Public Navbar & Footer */}
       <Route element={<PublicLayout />}>
-        <Route path="/" element={
-          <LoadingWrapper>
-            <ActiveHome />
-          </LoadingWrapper>
-        } />
+        <Route path="/" element={<HomeRouteGate />} />
         <Route path="/home" element={
           <LoadingWrapper>
             <Home />
@@ -66,10 +112,12 @@ const AppRoutes = () => {
           </LoadingWrapper>
         } />
 
-        {/* SEO Landing Routes (Configured in homeConfig.js) */}
-        {HOME_1_SEO_ROUTES.map((routePath) => (
-          <Route key={routePath} path={routePath} element={<DynamicSEORoute path={routePath} />} />
-        ))}
+        {/* Every other path (any depth) — /essay-1, /paper-4, /paper-19,
+            /whatever-nobody-created — goes through the same data-driven
+            HomeRouteGate. No per-keyword route list to maintain: whether
+            it renders Home, Home1, or redirects to "/" depends only on
+            what the backend actually has on record for this site tag. */}
+        <Route path="*" element={<HomeRouteGate />} />
 
         <Route path="/reviews" element={
           <LoadingWrapper>
@@ -202,9 +250,6 @@ const AppRoutes = () => {
           </LoadingWrapper>
         } />
       </Route>
-
-      {/* Fallback route */}
-      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

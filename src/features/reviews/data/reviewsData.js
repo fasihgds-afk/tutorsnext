@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 //  Reviews data — split by home variant
-//  Reviews page reads SITE_CONFIG.activeHome and picks the
-//  matching dataset automatically.
+//  Reviews page should use dynamic backend-controlled routing
+//  via useAppConfig to determine which dataset to show.
 // ─────────────────────────────────────────────────────────────
 
 // ── Home-1 reviews (Tutoring / live sessions) ─────────────────
