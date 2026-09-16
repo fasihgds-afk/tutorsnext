@@ -76,3 +76,18 @@ export const DEADLINE_OPTIONS = [
   '10 days',
   '15 days',
 ];
+
+// Deadline rates for price calculation (price per page)
+export const DEADLINE_RATES = {
+  "15 days": 8.25,
+  "10 days": 9.45,
+  "7 days": 9.5,
+  "5 days": 9.55,
+  "4 days": 10.35,
+  "3 days": 10.4,
+  "2 days": 11.4,
+  "24 hours": 12.25,
+  "12 hours": 13.1,
+  "6 hours": 14.9,
+  "3 hours": 14.95,
+};

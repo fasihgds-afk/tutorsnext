@@ -13,6 +13,7 @@ import Award from 'lucide-react/dist/esm/icons/award';
 import BadgeCheck from 'lucide-react/dist/esm/icons/badge-check';
 import BadgeDollarSign from 'lucide-react/dist/esm/icons/badge-dollar-sign';
 import BarChart3 from 'lucide-react/dist/esm/icons/bar-chart-3';
+import Calculator from 'lucide-react/dist/esm/icons/calculator';
 import BookMarked from 'lucide-react/dist/esm/icons/book-marked';
 import BookOpen from 'lucide-react/dist/esm/icons/book-open';
 import BookOpenCheck from 'lucide-react/dist/esm/icons/book-open-check';
@@ -94,6 +95,7 @@ export const hero = {
     phone: PhoneCall,
     message: MessagesSquare,
     lock: LockKeyhole,
+    calculator: Calculator,
   },
   loading: Loader2,
   success: CircleCheckBig,
