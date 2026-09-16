@@ -325,7 +325,7 @@ const HeroSection = () => {
                       {/* Original Price */}
                       <div className="flex items-center justify-between">
                         <span className="text-[9px] font-semibold text-slate-600">Original Price</span>
-                        <span className="text-[10px] font-bold text-slate-400 line-through">${calculatedPrice.originalPrice}</span>
+                        <span className="text-[10px] font-bold text-slate-400">${calculatedPrice.originalPrice}</span>
                       </div>
                       
                       {/* Discount */}
