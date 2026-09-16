@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   HeroSection,
   StatsSection,
@@ -18,6 +18,10 @@ import {
 } from '../../components/home';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'TutorsNext | Expert Academic Services';
+  }, []);
+
   return (
     <main className="w-full min-h-screen bg-gray-50 flex flex-col">
 
