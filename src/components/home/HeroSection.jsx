@@ -96,6 +96,7 @@ const HeroSection = () => {
             alt="Student"
             className="hero-edge-blend w-full h-full object-contain object-bottom"
           />
+          
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-20">
@@ -110,14 +111,15 @@ const HeroSection = () => {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-[30px] sm:text-[32px] lg:text-[38px] font-bold text-text-dark leading-tight tracking-tight">
+            <h1 className="text-[26px] sm:text-[30px] lg:text-[38px] font-bold text-text-dark leading-tight tracking-tight">
               Expert{' '}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-start to-brand-end">
                 Academic Writing Service
               </span>
+              <br className="block sm:hidden" />
               {' '}
-              <span className="text-[24px] sm:text-[26px] lg:text-[30px] font-bold text-text-dark">
-                for As Low As{' '}
+              <span className="text-[20px] sm:text-[24px] lg:text-[30px] font-bold text-text-dark">
+                For As Low As{' '}
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-start to-brand-end">
                   $8.25
                 </span>
