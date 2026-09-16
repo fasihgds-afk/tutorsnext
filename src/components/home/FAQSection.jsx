@@ -20,7 +20,7 @@ const faqs = [
     id: 3,
     question: 'How fast can you write my paper?',
     answer:
-      'Our subject-matter experts can deliver papers in as little as 3 hours, depending on the requirements and deadline. We always do our best to complete orders on time, and 99% of our orders are completed and delivered before the deadline.',
+      'Our subject-matter experts can deliver papers as fast as 3 hours", depending on the requirements and deadline. We always do our best to complete orders on time, and 99% of our orders are completed and delivered before the deadline.',
   },
   {
     id: 4,

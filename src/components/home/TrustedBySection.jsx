@@ -5,7 +5,7 @@ import { trustedBy } from '../../config/sectionIcons';
 const stats = [
   { id: 1, number: '500+', title: 'Expert Writers', subtitle: "PhD & Master's Level Experts", Icon: trustedBy.stats[0] },
   { id: 2, number: '125+', title: 'Subjects Covered', subtitle: 'From Business to Engineering & More', Icon: trustedBy.stats[1] },
-  { id: 3, number: '8.3K+', title: 'Oders Completed', subtitle: 'High Quality Assignment Delivered', Icon: trustedBy.stats[2] },
+  { id: 3, number: '8.3K+', title: 'Orders Completed', subtitle: 'High Quality Assignment Delivered', Icon: trustedBy.stats[2] },
   { id: 4, number: '99%', title: 'Client Satisfaction', subtitle: 'Students Love Our Work & Support', Icon: trustedBy.stats[3] },
 ];
 

@@ -52,7 +52,7 @@ const SupportSection = () => {
         {/* Top Badge */}
         <div className="inline-flex items-center gap-2 bg-primary-soft text-brand-purple px-4 py-1.5 rounded-full text-[12px] lg:text-[13px] font-semibold mb-4 shadow-xs border border-primary-border hover:scale-105 transition-transform duration-300 cursor-default">
           <Icon icon={support.badge} className="w-4 h-4 shrink-0" />
-          <span>WE'VE GOT YOUR BACK</span>
+          <span>WE'VE GOT YOU COMPLETELY COVERED</span>
         </div>
 
         {/* Heading */}
