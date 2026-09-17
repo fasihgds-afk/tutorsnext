@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileText, Clock, File } from 'lucide-react';
+import { FileText, Clock, File, GraduationCap } from 'lucide-react';
 import Icon from '../common/Icon';
 import DiscountBadge from '../common/DiscountBadge';
 import { hero } from '../../config/sectionIcons';
 import {
   assignmentType,
+  academicLevel,
   deadline,
 } from '../../config/dropdown-fields.config';
 import { DEADLINE_RATES } from '../../features/orders/constants/orderOptions';
@@ -20,10 +21,12 @@ const perks = [
 const HeroSection = () => {
   const navigate = useNavigate();
   const [typeOfWork, setTypeOfWork] = useState('Short Essay');
+  const [academicLevelSelected, setAcademicLevelSelected] = useState('Undergraduate');
   const [selectedDeadline, setSelectedDeadline] = useState('15 days / Sep 10, 2026 (11:06 PM)');
   const [numberOfPages, setNumberOfPages] = useState(1);
   const [calculatedPrice, setCalculatedPrice] = useState(null);
   const [showOrderButton, setShowOrderButton] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   const calculatePrice = () => {
     // Extract deadline key from the label (e.g., "3 days / Aug 29, 2026" -> "3 days")
@@ -74,13 +77,15 @@ const HeroSection = () => {
     const heroOrderData = {
       assignmentTypeLabel: typeOfWork,
       typeOfWork,
+      academicLevelLabel: academicLevelSelected,
+      academicLevel: academicLevelSelected,
       deadlineLabel: selectedDeadline,
       deadline: selectedDeadline,
       pages: numberOfPages,
       savedAt: Date.now(),
     };
     localStorage.setItem('heroOrderData', JSON.stringify(heroOrderData));
-    
+
     // Redirect to register page
     navigate('/account/register');
   };
@@ -208,14 +213,14 @@ const HeroSection = () => {
               {!calculatedPrice && <DiscountBadge />}
 
               {/* Form Body */}
-              <div className={`pt-10 px-4 lg:px-5 pb-6 space-y-3 ${calculatedPrice ? 'space-y-1.5 pt-8 pb-4' : 'space-y-3'}`}>
+              <div className={`pt-10 px-4 lg:px-5 pb-6 space-y-2 ${calculatedPrice ? 'space-y-1.5 pt-8 pb-4' : 'space-y-2'}`}>
                 {/* Assignment Type */}
-                <div className={`group flex items-center gap-3 ${calculatedPrice ? 'gap-2' : 'gap-3'}`}>
-                  <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-8 h-8 lg:w-9 lg:h-9' : ''}`}>
-                    <FileText className={`w-4 h-4 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3.5 h-3.5' : ''}`} />
+                <div className={`group flex items-center gap-2 ${calculatedPrice ? 'gap-2' : 'gap-2'}`}>
+                  <div className={`w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-7 h-7 lg:w-8 lg:h-8' : ''}`}>
+                    <FileText className={`w-3.5 h-3.5 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3 h-3' : ''}`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className={`text-[11px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[10px] mb-0.5' : ''}`}>Assignment Type</label>
+                    <label className={`text-[10px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[9px] mb-0.5' : ''}`}>Assignment Type</label>
                     <div className="relative">
                       <select
                         value={typeOfWork}
@@ -223,7 +228,7 @@ const HeroSection = () => {
                           setTypeOfWork(e.target.value);
                           handleInputChange();
                         }}
-                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate ${calculatedPrice ? 'py-2 text-[12px] px-2.5' : ''}`}
+                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-2.5 py-2 text-[12px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate ${calculatedPrice ? 'py-1.5 text-[11px] px-2' : ''}`}
                       >
                         {assignmentType.groups.map((g) => (
                           <optgroup key={g.group} label={g.group}>
@@ -244,13 +249,44 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Number of Pages */}
-                <div className={`group flex items-center gap-3 ${calculatedPrice ? 'gap-2' : 'gap-3'}`}>
-                  <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-8 h-8 lg:w-9 lg:h-9' : ''}`}>
-                    <File className={`w-4 h-4 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3.5 h-3.5' : ''}`} />
+                {/* Academic Level */}
+                <div className={`group flex items-center gap-2 ${calculatedPrice ? 'gap-2' : 'gap-2'}`}>
+                  <div className={`w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-7 h-7 lg:w-8 lg:h-8' : ''}`}>
+                    <GraduationCap className={`w-3.5 h-3.5 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3 h-3' : ''}`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className={`text-[11px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[10px] mb-0.5' : ''}`}>Number of Pages</label>
+                    <label className={`text-[10px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[9px] mb-0.5' : ''}`}>Academic Level</label>
+                    <div className="relative">
+                      <select
+                        value={academicLevelSelected}
+                        onChange={(e) => {
+                          setAcademicLevelSelected(e.target.value);
+                          handleInputChange();
+                        }}
+                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-2.5 py-2 text-[12px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate ${calculatedPrice ? 'py-1.5 text-[11px] px-2' : ''}`}
+                      >
+                        {academicLevel.options.map((o) => (
+                          <option key={o.value} value={o.label}>
+                            {o.label}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-text-body opacity-60">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Number of Pages */}
+                <div className={`group flex items-center gap-2 ${calculatedPrice ? 'gap-2' : 'gap-2'}`}>
+                  <div className={`w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-7 h-7 lg:w-8 lg:h-8' : ''}`}>
+                    <File className={`w-3.5 h-3.5 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3 h-3' : ''}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className={`text-[10px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[9px] mb-0.5' : ''}`}>Number of Pages</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -261,19 +297,19 @@ const HeroSection = () => {
                           setNumberOfPages(Math.max(1, parseInt(e.target.value) || 1));
                           handleInputChange();
                         }}
-                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 ${calculatedPrice ? 'py-2 text-[12px] px-2.5' : ''}`}
+                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-2.5 py-2 text-[12px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 ${calculatedPrice ? 'py-1.5 text-[11px] px-2' : ''}`}
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Deadline */}
-                <div className={`group flex items-center gap-3 ${calculatedPrice ? 'gap-2' : 'gap-3'}`}>
-                  <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-8 h-8 lg:w-9 lg:h-9' : ''}`}>
-                    <Clock className={`w-4 h-4 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3.5 h-3.5' : ''}`} />
+                <div className={`group flex items-center gap-2 ${calculatedPrice ? 'gap-2' : 'gap-2'}`}>
+                  <div className={`w-8 h-8 lg:w-9 lg:h-9 rounded-xl bg-primary-100 flex items-center justify-center shrink-0 text-brand-purple group-hover:bg-primary group-hover:text-surface transition-all duration-300 ${calculatedPrice ? 'w-7 h-7 lg:w-8 lg:h-8' : ''}`}>
+                    <Clock className={`w-3.5 h-3.5 text-brand-purple group-hover:text-surface transition-colors duration-300 ${calculatedPrice ? 'w-3 h-3' : ''}`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <label className={`text-[11px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[10px] mb-0.5' : ''}`}>Deadline</label>
+                    <label className={`text-[10px] font-bold text-text-body block mb-0.5 ${calculatedPrice ? 'text-[9px] mb-0.5' : ''}`}>Deadline</label>
                     <div className="relative">
                       <select
                         value={selectedDeadline}
@@ -281,7 +317,7 @@ const HeroSection = () => {
                           setSelectedDeadline(e.target.value);
                           handleInputChange();
                         }}
-                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-3 py-2.5 text-[13px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate ${calculatedPrice ? 'py-2 text-[12px] px-2.5' : ''}`}
+                        className={`w-full bg-surface-alt border border-primary-border rounded-xl px-2.5 py-2 text-[12px] text-text-dark font-medium focus:outline-none focus:border-primary hover:border-primary transition-all duration-200 cursor-pointer appearance-none pr-8 truncate ${calculatedPrice ? 'py-1.5 text-[11px] px-2' : ''}`}
                       >
                         {deadline.options.map((o) => (
                           <option key={o.value} value={o.label}>
@@ -312,42 +348,25 @@ const HeroSection = () => {
                 {/* Price Display */}
                 {calculatedPrice && (
                   <div className="bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 rounded-xl p-3 mt-2 shadow-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-[10px] font-bold text-slate-800">Price Breakdown</h3>
-                      <div className="flex items-center gap-1.5 text-[9px] text-slate-500">
-                        <span>{calculatedPrice.deadlineKey}</span>
-                        <span>•</span>
-                        <span>{numberOfPages} page{numberOfPages > 1 ? 's' : ''}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {/* Original Price */}
                       <div className="flex items-center justify-between">
-                        <span className="text-[9px] font-semibold text-slate-600">Original Price</span>
-                        <span className="text-[10px] font-bold text-slate-400">${calculatedPrice.originalPrice}</span>
-                      </div>
-                      
-                      {/* Discount */}
-                      <div className="flex items-center justify-between bg-emerald-100/50 -mx-2 px-2 py-1 rounded-lg">
-                        <span className="text-[9px] font-bold text-emerald-800 flex items-center gap-1">
-                          <span>Limited Time Discount</span>
-                          <span className="bg-emerald-200 text-emerald-900 text-[8px] font-black px-1 py-0.5 rounded">50%</span>
+                        <span className="text-[11px] sm:text-xs font-semibold text-slate-600">Original Price</span>
+                        <span className="text-xs sm:text-sm font-bold text-slate-400 line-through decoration-slate-400 decoration-1.5">
+                          ${calculatedPrice.originalPrice}
                         </span>
-                        <span className="text-[10px] font-bold text-emerald-600">-${calculatedPrice.discountAmount}</span>
                       </div>
                       
-                      {/* Final Price */}
-                      <div className="flex items-center justify-between pt-1.5 border-t border-emerald-200">
-                        <span className="text-[10px] font-black text-slate-900">Final Price</span>
-                        <span className="text-base font-black text-primary">${calculatedPrice.finalPrice}</span>
+                      {/* Discounted Price */}
+                      <div className="flex items-center justify-between bg-emerald-100/60 -mx-1.5 px-2.5 py-1.5 rounded-lg">
+                        <span className="text-xs sm:text-[13px] font-bold text-emerald-900 flex items-center gap-1.5">
+                          <span>Final Discounted Price</span>
+                          <span className="bg-emerald-200 text-emerald-900 text-[10px] font-extrabold px-1.5 py-0.5 rounded">50%</span>
+                        </span>
+                        <span className="text-sm sm:text-base font-extrabold text-emerald-700">
+                          ${calculatedPrice.finalPrice}
+                        </span>
                       </div>
-                    </div>
-                    
-                    <div className="mt-2 pt-1.5 border-t border-emerald-200 text-center">
-                      <p className="text-[8px] text-emerald-700 font-semibold">
-                        You save 50% on your order!
-                      </p>
                     </div>
                   </div>
                 )}
