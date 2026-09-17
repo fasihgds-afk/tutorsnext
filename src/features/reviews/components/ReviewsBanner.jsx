@@ -1,32 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../../../config/siteConfig';
 
 const ReviewsBanner = () => {
   return (
-    <div className="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-8 px-4 sm:px-6 lg:px-8 shadow-md">
-      <div className="max-w-[1200px] mx-auto flex items-center gap-5">
+    <div className="w-full bg-gradient-to-r from-primary to-primary-hover text-white py-14 px-4 sm:px-6 lg:px-8 shadow-md">
+      <div className="max-w-[800px] mx-auto flex flex-col items-center text-center gap-4">
 
+        {/* Main Heading */}
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
+          TutorNext Reviews
+        </h1>
 
-        {/* Brand Info */}
-        <div className="flex flex-col gap-0.5 ml-10">
-          <div className="flex items-center gap-3">
-            <img
-              src={SITE_CONFIG.logo.header.src}
-              alt={SITE_CONFIG.logo.alt}
-              className={SITE_CONFIG.logo.header.className}
-            />
-            <span className="bg-white/20 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">✓</span>
-          </div>
-          <div className="flex items-center gap-2 text-[13px] text-white/90 font-medium">
-            <span>4.9/5</span>
-            <span className="text-amber-300 tracking-tight">★★★★★</span>
-            <span className="font-bold text-white">Excellent</span>
-          </div>
-          <span className="text-[11.5px] text-white/75 mt-0.5">
-            Based on 4,000+ verified student reviews
-          </span>
-        </div>
+        {/* Description */}
+        <p className="text-[15px] sm:text-[16px] text-white/85 leading-relaxed max-w-[680px]">
+          See what students have to say about their learning experiences with TutorNext. Read genuine feedback from students who have used our tutoring platform to find support, improve their understanding, and reach their academic goals.
+        </p>
+
+        {/* End tagline */}
+        <span className="mt-1 text-sm sm:text-[15px] font-semibold text-white/70 italic tracking-wide">
+          TutorNext Feedback from Our Students
+        </span>
 
       </div>
     </div>
@@ -34,3 +26,4 @@ const ReviewsBanner = () => {
 };
 
 export default ReviewsBanner;
+

@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from '../../../components/common/Icon.jsx';
 import { reviews } from '../../../config/sectionIcons.js';
 
 const ratingBars = [
   { label: '5 star', pct: '95%', value: '95%' },
-  { label: '4 star', pct: '4%',  value: '4%' },
+  { label: '4 star', pct: '4%',  value: '4%'  },
   { label: '3 star', pct: '0.5%', value: '0.5%' },
   { label: '2 star', pct: '0.3%', value: '0.3%' },
   { label: '1 star', pct: '0.2%', value: '0.2%' },
 ];
 
-const ReviewsHeader = () => {
-  const [sortBy, setSortBy] = useState('Most Recent');
-
+const ReviewsHeader = ({ sortBy, onSortChange }) => {
   return (
     <div className="bg-white rounded-[20px] border border-[#f1f5f9] p-6 lg:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col gap-6">
 
@@ -52,7 +50,7 @@ const ReviewsHeader = () => {
         <div className="relative">
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) => onSortChange(e.target.value)}
             className="px-4 py-2 bg-white border border-slate-300 rounded-xl text-[#0f172a] text-[13.5px] font-bold appearance-none focus:outline-none focus:border-primary pr-10 cursor-pointer hover:border-primary transition-colors"
           >
             <option>Most Recent</option>
@@ -70,3 +68,4 @@ const ReviewsHeader = () => {
 };
 
 export default ReviewsHeader;
+
