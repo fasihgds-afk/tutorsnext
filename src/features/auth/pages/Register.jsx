@@ -94,7 +94,7 @@ const Register = () => {
 
             {/* Subtitle */}
             <p className="text-[16px] text-text-body font-medium opacity-70 max-w-[460px] leading-relaxed -mt-1 tracking-tight">
-              Join thousands of students who trust TutorsNext for high-quality tutoring services.
+              Join thousands of students who trust TutorsNext for high-quality writing services.
             </p>
 
             {/* Perks 2x2 grid */}
