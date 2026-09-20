@@ -88,7 +88,7 @@ const Register = () => {
             <h1 className="text-[36px] font-bold text-text-dark leading-tight tracking-tight">
               Create Your Account &amp; Connect With{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-start to-brand-end">
-                Top Tutors
+                Top Writers
               </span>
             </h1>
 
